@@ -1,0 +1,193 @@
+<!-- KPS-I final project, Maria Ricci -->
+<!-- 14.09.20 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Overnight Nearby - Map</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" type="text/css"
+    media="all" />
+  <!-- custom styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/samples.css" type="text/css" />
+  <!-- sidebar panel plugin -->
+  <link rel="stylesheet" href="css/BootSideMenu.css">
+  <!-- openlayers 6 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
+  <!-- KPS scripts -->
+  <script src="js/defineLayerContainer.js"></script>
+  <script src="js/functions.js"></script>
+</head>
+
+<body>
+  <script>
+    // SET DEFAULT VALUES
+    var isBase = 'osmLayer';
+  </script>
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg static-top navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="#">Overnight Nearby</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">App
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="howitworks.html">How it works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!----------------------------- Page Content -------------------------------->
+  <!-- Info bar -->
+  <div class="row" style="padding: 5px;">
+    <!-- Adress search  -->
+    <div class="col-3">
+      <div class="input-group md-form form-sm form-2 pl-0" style="height: 37.3px;">
+        <input id="AdressSearch" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search places"
+          aria-label="Search">
+        <div class="input-group-append">
+          <span class="input-group-text lime lighten-2" id="GoButton"><i class="fa fa-search text-grey"
+              aria-hidden="true"></i></span>
+        </div>
+      </div>
+    </div>
+    <!-- Mouse position and coordinate catcher -->
+    <div class="col-2 col-coord-box">
+      <div class="form-control form-coord-box" type="text" readonly style="text-align: center;">
+        <div id='mouse-position'></div>
+      </div>
+    </div>
+    <div class="col-2 coord-box">
+      <div class="form-check" style="padding-top: 5px;">
+        <input class="form-check-input" title="Coordinate catcher" type="checkbox" id="coordinate-switch">
+        <label class="form-check-label" for="coordinate-switch">
+          Get coordinates
+        </label>
+      </div>
+    </div>
+    <!-- Display info about top layer (works with DLM50 Naturschutzgebiete) -->
+    <div class="col-4">
+      <div id="info" class="info">&nbsp;</div>
+    </div>
+  </div>
+  <!-- Map -->
+  <div class="container-push">
+    <div id="map" class="map"></div>
+  </div>
+  <!-- display info cards when camping areas points are selected -->
+  <div id="campInfo"></div>
+  <!------------------------------ Sidebar ------------------------------------->
+  <div id="controllers">
+    <div id=controls-wrapper>
+      <!-- Base Layer Menu -->
+      <div id="basemap">
+        <h3>Choose Base Map</h3>
+        <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" ; onclick="setBasemap('osmLayer');" type="radio"
+            name="basemap" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            OSM
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" title="World Topo Map" ; onclick="setBasemap('bingLayer');" type="radio"
+            name="basemap" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            BING Aerial with labels
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" title="Stamen Toner" ; onclick="setBasemap('terrain');" type="radio"
+            name="basemap" id="exampleRadios4" value="option4">
+          <label class="form-check-label" for="exampleRadios4">
+            Stamen Terrain
+          </label>
+        </div>
+      </div>
+      <!-- end Base Layer Menu ................... -->
+      <hr>
+      <!-- Overlay Menu ........................... -->
+      <h3 style="display: inline;vertical-align: middle;">Overlays</h3>
+      <div class="dropdown" style="float: right;">
+        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add overlays
+        </button>
+        <div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" ; title="Aerial Photo RLP" ; onclick="addOverlay('DOPLayer');">
+            Trier DOP40</a>
+          <a class="dropdown-item" href="#" ; title="Precipitation" ; onclick="addOverlay('OW_precipitation');">
+            Current precipitation</a>
+          <a class="dropdown-item" href="#" ; title="Clouds" ; onclick="addOverlay('OW_clouds');">
+            Current cloud cover</a>
+          <a class="dropdown-item" href="#" ; title="Temperature" ; onclick="addOverlay('OW_temperature');">
+            Current temperature</a>
+          <a class="dropdown-item" href="#" ; title="Camping sites query" ; onclick="addOverlay('camp_areas');">
+            Camping sites DE</a>
+          <a class="dropdown-item" href="#" ; title="DLM50 Naturschutzgebiete RLP" ;
+            onclick="addOverlay('naturschutzgebiete');">
+            DLM50 Naturschutzgebiete RLP</a>
+          <a class="dropdown-item" href="#" ; title="DLM50 Stehendes Gewässer RL" ;
+            onclick="addOverlay('stehendesgewaesser');">
+            DLM50 Stehendes Gewässer RLP</a>
+          <a class="dropdown-item" href="#" ; title="DLM250 Gewässerflächen" ;
+            onclick="addOverlay('DLM250gewaesserflaechen');">
+            DLM250 Gewässerflächen</a>
+        </div>
+      </div>
+      <!-- end Overlay Layer Menu ................... -->
+      <div id='overlaysDiv'></div>
+      <hr>
+      <h4>InfoBox</h4>
+      <div id='infoDiv'></div>
+    </div>
+  </div>
+  <!--end Sidebar -->
+  <!-- Footer -->
+  <footer class="page-footer font-small footer-custom">
+    <div class=" text-center py-3">
+      Kartographisches Projektstudium I - Sommersemester 2020 - Maria Ricci
+    </div>
+  </footer>
+  <!-- end Footer -->
+  <!-- Bootstrap, jQuery, plugins scripts -->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/BootSideMenu.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

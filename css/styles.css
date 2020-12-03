@@ -1,0 +1,78 @@
+.navbar-custom {
+    background-color: rgb(38, 184, 38);
+}
+
+.navbar-custom a {
+    color: black;
+}
+
+#controls-wrapper {
+    padding: 10px;
+}
+
+.mouse-position-box {
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 20%;
+    background-color: lightgray;
+}
+
+#info {
+    line-height: 1.1em;
+    /* font-size: 0.8em; */
+    height: 37.3px;
+    display: flex;
+    align-items: center;
+}
+
+#campInfo {
+    padding: 10px;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    margin: 0px;
+  }
+  .col {
+    flex: 1;
+    padding: 16px;
+  }
+
+  .active {
+      font-weight: bold;
+  }
+
+  .nav-link:hover {
+      font-weight: bold;
+  }
+
+  .footer-custom {
+    background-color: rgb(28, 136, 28);
+  }
+
+  .col-2 {
+      padding-left: 0px !important;
+  }
+
+  .coord-box {
+        background-color: rgb(233, 236, 239);
+        border: 1px solid rgb(206, 212, 218);
+        border-radius: 4px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-left: unset;
+        max-width: 15%;
+  }
+
+  .col-coord-box {
+        max-width: 10%;
+        padding: 0;
+  }
+
+  .form-coord-box {
+	text-align: center;
+	border-top-right-radius: unset;
+	border-bottom-right-radius: unset;
+	border-right: unset;
+}
