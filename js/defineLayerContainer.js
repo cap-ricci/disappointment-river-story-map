@@ -1,4 +1,5 @@
 function defineLayerContainer() {
+  // TODO remove unused layers
   var layers = {};
   //define layers from esri Deutschland (arcGis rest service api)
   var FeatureServices = [
@@ -137,7 +138,7 @@ function defineLayerContainer() {
   layers['camp_areas'].attribution = 'Camping areas query via GEOSERVER SQL view.'
 
   // OpenWeather layers
-  var OWapikey = 'd7ddce06ea6ff5606269ed46d31907b2'
+  var OWapikey = ''
   layers['OW_temperature'] = new ol.layer.Tile({
     source: new ol.source.XYZ({
       url: 'https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=' + OWapikey
