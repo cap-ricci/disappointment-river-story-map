@@ -51,9 +51,7 @@ var displayFeatureInfo = function (pixel) {
       info.push(features[i].get('name'));
     }
     document.getElementById('info').innerHTML = info.join(', ') || '(unknown)';
-  } else {
-    document.getElementById('info').innerHTML = '&nbsp;';
-  }
+  } 
 };
 
 map.setView(view);
@@ -77,18 +75,8 @@ map.on('click', function (evt) {
   displayFeatureInfo(evt.pixel);
 });
 map.on('singleclick', function (evt) {
-  // when coordinate catcher is enabled, send coordinates to Google Maps
-  var cs = document.getElementById("coordinate-switch")
-  if (cs.checked) {
-    var coords = ol.proj.toLonLat(evt.coordinate);
-    var lat = coords[1];
-    var lon = coords[0];
-    url = 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lon
-    // open Google Maps in new window
-    window.open(url, '_blank');
-  }
   //when top layer is camping area, enable the SQL query, and show info card when user clicks on records
-  else if (window.topLayer == 'camp_areas') {
+  if (window.topLayer == 'camp_areas') {
     //update SQL query with new radius and coordinates
     xcoord = evt.coordinate[0].toString();
     ycoord = evt.coordinate[1].toString();
