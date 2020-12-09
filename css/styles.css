@@ -17,14 +17,6 @@
     background-color: lightgray;
 }
 
-#info {
-    line-height: 1.1em;
-    /* font-size: 0.8em; */
-    height: 37.3px;
-    display: flex;
-    align-items: center;
-}
-
 #campInfo {
     padding: 10px;
 }
