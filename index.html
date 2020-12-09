@@ -9,8 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="something">
   <meta name="author" content="">
-<!-- TODO change application name  -->
-  <title>Disappointment river - story map</title>
+
+  <title>Overnight Nearby - Map</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,8 +20,7 @@
     media="all" />
   <!-- custom styles -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/samples.css" type="text/css">
-  <link rel="stylesheet" href="css/simple-sidebar.css">
+  <link rel="stylesheet" href="css/samples.css" type="text/css" />
   <!-- sidebar panel plugin -->
   <link rel="stylesheet" href="css/BootSideMenu.css">
   <!-- openlayers 6 -->
@@ -36,28 +35,13 @@
   <script>
     // SET DEFAULT VALUES
     var isBase = 'osmLayer';
-    // TODO move in main.js
-    function openNav() {
-      document.getElementById("tocSidenav").style.width = "250px";
-    }
-    
-    function closeNav() {
-      document.getElementById("tocSidenav").style.width = "0";
-    }
   </script>
 
-<!-- ToC sidebar -->
-<div id="tocSidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">1789: Mackenzie exploration</a>
-  <a href="#">2016: Castner paddles the Mackenzie river</a>
-  <a href="#">James Cook third exploration</a>
-  <a href="#">...</a>
-</div>
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg static-top navbar-custom">
     <div class="container">
-      <span style="cursor:pointer" onclick="openNav()">&#9776; Show contents</span>
+      <a class="navbar-brand" href="#">Overnight Nearby</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,143 +52,28 @@
             <a class="nav-link" href="#">App
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="howitworks.html">How it works</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
   </nav>
-  <div class="d-flex" id="wrapper">
-    <!-- controllers Sidebar -->
-<div class="bg-light border-right" id="sidebar-wrapper">
-  <div class="sidebar-heading">Controllers </div>
-  <div class="list-group list-group-flush">
-    <a href="#" class="list-group-item list-group-item-action bg-light">1</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">2</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">3</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">4</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">5</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">6</a>
-  </div>
-</div>
-<div id="page-content-wrapper">
+
   <!----------------------------- Page Content -------------------------------->
-  <!-- Info bar -->
-  <div class="row" style="padding: 5px;">
-    <!-- Adress search  -->
-    <div class="col-3">
-      <div class="input-group md-form form-sm form-2 pl-0" style="height: 37.3px;">
-        <input id="AdressSearch" class="form-control my-0 py-1 lime-border" type="text" placeholder="Search places"
-          aria-label="Search">
-        <div class="input-group-append">
-          <span class="input-group-text lime lighten-2" id="GoButton"><i class="fa fa-search text-grey"
-              aria-hidden="true"></i></span>
-        </div>
-      </div>
-    </div>
-    <!-- Mouse position and coordinate catcher -->
-    <div class="col-2 col-coord-box">
-      <div class="form-control form-coord-box" type="text" readonly style="text-align: center;">
-        <div id='mouse-position'></div>
-      </div>
-    </div>
-    <div class="col-2 coord-box">
-      <div class="form-check" style="padding-top: 5px;">
-        <input class="form-check-input" title="Coordinate catcher" type="checkbox" id="coordinate-switch">
-        <label class="form-check-label" for="coordinate-switch">
-          Get coordinates
-        </label>
-      </div>
-    </div>
-    <!-- Display info about top layer (works with DLM50 Naturschutzgebiete) -->
-    <div class="col-4">
-      <div id="info" class="info">&nbsp;</div>
-    </div>
-  </div>
   <!-- Map -->
   <div class="container-push">
     <div id="map" class="map"></div>
   </div>
   <!-- display info cards when camping areas points are selected -->
-  <div id="campInfo"></div>
-  <!-- TODO remove old sidebar and js code -->
-  <!------------------------------ old Sidebar ------------------------------------->
-  <div id="controllers">
-    <div id=controls-wrapper>
-      <!-- Base Layer Menu -->
-      <div id="basemap">
-        <h3>Choose Base Map</h3>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="setBasemap('osmLayer');" type="radio"
-            name="basemap" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
-            OSM
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="World Topo Map" ; onclick="setBasemap('bingLayer');" type="radio"
-            name="basemap" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-            BING Aerial with labels
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Stamen Toner" ; onclick="setBasemap('terrain');" type="radio"
-            name="basemap" id="exampleRadios4" value="option4">
-          <label class="form-check-label" for="exampleRadios4">
-            Stamen Terrain
-          </label>
-        </div>
-      </div>
-      <!-- end Base Layer Menu ................... -->
-      <hr>
-      <!-- Overlay Menu ........................... -->
-      <h3 style="display: inline;vertical-align: middle;">Overlays</h3>
-      <div class="dropdown" style="float: right;">
-        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Add overlays
-        </button>
-        <div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#" ; title="Aerial Photo RLP" ; onclick="addOverlay('DOPLayer');">
-            Trier DOP40</a>
-          <a class="dropdown-item" href="#" ; title="Precipitation" ; onclick="addOverlay('OW_precipitation');">
-            Current precipitation</a>
-          <a class="dropdown-item" href="#" ; title="Clouds" ; onclick="addOverlay('OW_clouds');">
-            Current cloud cover</a>
-          <a class="dropdown-item" href="#" ; title="Temperature" ; onclick="addOverlay('OW_temperature');">
-            Current temperature</a>
-          <a class="dropdown-item" href="#" ; title="Camping sites query" ; onclick="addOverlay('camp_areas');">
-            Camping sites DE</a>
-          <a class="dropdown-item" href="#" ; title="DLM50 Naturschutzgebiete RLP" ;
-            onclick="addOverlay('naturschutzgebiete');">
-            DLM50 Naturschutzgebiete RLP</a>
-          <a class="dropdown-item" href="#" ; title="DLM50 Stehendes Gewässer RL" ;
-            onclick="addOverlay('stehendesgewaesser');">
-            DLM50 Stehendes Gewässer RLP</a>
-          <a class="dropdown-item" href="#" ; title="DLM250 Gewässerflächen" ;
-            onclick="addOverlay('DLM250gewaesserflaechen');">
-            DLM250 Gewässerflächen</a>
-        </div>
-      </div>
-      <!-- end Overlay Layer Menu ................... -->
-      <div id='overlaysDiv'></div>
-      <hr>
-      <h4>InfoBox</h4>
-      <div id='infoDiv'></div>
-    </div>
-  </div>
-  <!--end old Sidebar -->
-</div>
-</div>
+
   <!-- Footer -->
   <footer class="page-footer font-small footer-custom">
     <div class=" text-center py-3">
-      Kartographisches Projektstudium II
+      Kartographisches Projektstudium I - Sommersemester 2020 - Maria Ricci
     </div>
   </footer>
   <!-- end Footer -->
