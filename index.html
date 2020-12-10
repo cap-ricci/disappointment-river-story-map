@@ -10,7 +10,8 @@
   <meta name="description" content="something">
   <meta name="author" content="">
 
-  <title>Overnight Nearby - Map</title>
+<!-- TODO change application name  -->
+<title>Disappointment river - story map</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,6 +21,7 @@
     media="all" />
   <!-- custom styles -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/simple-sidebar.css">
   <link rel="stylesheet" href="css/samples.css" type="text/css" />
   <!-- sidebar panel plugin -->
   <link rel="stylesheet" href="css/BootSideMenu.css">
@@ -34,14 +36,29 @@
 <body>
   <script>
     // SET DEFAULT VALUES
-    var isBase = 'osmLayer';
+    var isBase = 'toner';
+    // TODO move in main.js
+    function openNav() {
+      document.getElementById("tocSidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("tocSidenav").style.width = "0";
+    }
   </script>
 
-
+<!-- ToC sidebar -->
+<div id="tocSidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">1789: Mackenzie exploration</a>
+  <a href="#">2016: Castner paddles the Mackenzie river</a>
+  <a href="#">James Cook third exploration</a>
+  <a href="#">...</a>
+</div>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg static-top navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">Overnight Nearby</a>
+      <span style="cursor:pointer" onclick="openNav()">&#9776; Show contents</span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,28 +69,41 @@
             <a class="nav-link" href="#">App
             </a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="howitworks.html">How it works</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
-          </li> -->
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-
+  <div class="d-flex" id="wrapper">
+    <!-- controllers Sidebar -->
+<div class="bg-light border-right" id="sidebar-wrapper">
+  <div class="sidebar-heading">Controllers</div>
+  <div class="list-group list-group-flush">
+    <a href="#" class="list-group-item list-group-item-action bg-light">1</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">2</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">3</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">4</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">5</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">6</a>
+  </div>
+</div>
+<div id="page-content-wrapper">
   <!----------------------------- Page Content -------------------------------->
   <!-- Map -->
   <div class="container-push">
     <div id="map" class="map"></div>
   </div>
-  <!-- display info cards when camping areas points are selected -->
-
+</div>
+</div>
   <!-- Footer -->
   <footer class="page-footer font-small footer-custom">
     <div class=" text-center py-3">
-      Kartographisches Projektstudium I - Sommersemester 2020 - Maria Ricci
+      Kartographisches Projektstudium II
     </div>
   </footer>
   <!-- end Footer -->
