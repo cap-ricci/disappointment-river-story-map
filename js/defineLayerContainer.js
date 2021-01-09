@@ -12,17 +12,15 @@ function defineLayerContainer() {
       layer: 'toner'
     })
   });
+  layers['watercolor'] = new ol.layer.Tile({
+    source: new ol.source.Stamen({
+      layer: 'watercolor'
+    })
+  });
   // Define Terrain layer
   layers['terrain'] = new ol.layer.Tile({
     source: new ol.source.Stamen({
       layer: 'terrain'
-    })
-  });
-  // Define bingLayer
-  layers['bingLayer'] = new ol.layer.Tile({
-    source: new ol.source.BingMaps({
-      key: 'AtZ75pXnX1KpB9s24HGIbCxs5BdCkStfydSjLigwNDwC1vd0vJB8GBz3uPfV1rHS',
-      imagerySet: 'AerialWithLabelsOnDemand'
     })
   });
 

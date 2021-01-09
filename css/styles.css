@@ -1,9 +1,13 @@
 .navbar-custom {
-    background-color: rgb(38, 184, 38);
+    background-color:   #292d31;
 }
 
 .navbar-custom a {
-    color: black;
+    color:#818181!important;
+}
+
+.bg-dark a {
+    color: #818181!important;
 }
 
 #controls-wrapper {
@@ -40,7 +44,8 @@
   }
 
   .footer-custom {
-    background-color: rgb(28, 136, 28);
+    background-color: black;
+    color: white;
   }
 
   .col-2 {

@@ -23,14 +23,15 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/simple-sidebar.css">
   <link rel="stylesheet" href="css/samples.css" type="text/css" />
+  <link rel="stylesheet" href="prototype/styles/style.css"/>
   <!-- sidebar panel plugin -->
   <link rel="stylesheet" href="css/BootSideMenu.css">
   <!-- openlayers 6 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
   <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
-  <!-- KPS scripts -->
-  <script src="js/defineLayerContainer.js"></script>
-  <script src="js/functions.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+  	<!-- ol-ext -->
+	<link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 </head>
 
 <body>
@@ -50,15 +51,16 @@
 <!-- ToC sidebar -->
 <div id="tocSidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">1789: Mackenzie exploration</a>
-  <a href="#">2016: Castner paddles the Mackenzie river</a>
-  <a href="#">James Cook third exploration</a>
-  <a href="#">...</a>
+  <a href="#" title="story" onclick = "story_init('cook');">Cook's third journey - 1771-1773</a>
+  <a href="#"; title="story"; onclick = "story_init('hearne');">Hearne's exploration of Coppermine River</a>
 </div>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg static-top navbar-custom">
-    <div class="container">
-      <span style="cursor:pointer" onclick="openNav()">&#9776; Show contents</span>
+    <div class="container-fluid">
+
+        <a style="cursor: pointer;" onclick="openNav()">&#9776; Show storylines</a>
+      
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -81,22 +83,25 @@
   </nav>
   <div class="d-flex" id="wrapper">
     <!-- controllers Sidebar -->
-<div class="bg-light border-right" id="sidebar-wrapper">
-  <div class="sidebar-heading">Controllers</div>
+<div class="bg-dark border-right" id="sidebar-wrapper">
+  <!-- <div class="sidebar-heading">Controllers</div> -->
   <div class="list-group list-group-flush">
-    <a href="#" class="list-group-item list-group-item-action bg-light">1</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">2</a>
+    <a href="#" class="list-group-item list-group-item-action bg-dark" title="timeline"; onclick = "start_timelines();">Timeline</a>
+    <!-- <a href="#" class="list-group-item list-group-item-action bg-light">2</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">3</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">4</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">5</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">6</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">6</a> -->
   </div>
 </div>
 <div id="page-content-wrapper">
   <!----------------------------- Page Content -------------------------------->
   <!-- Map -->
   <div class="container-push">
-    <div id="map" class="map"></div>
+      <!-- Map div -->
+  <div id="map" style="width:1000px; height:600px;"></div>
+  <div id="story"></div>
+  <div class="options"></div>
   </div>
 </div>
 </div>
@@ -118,7 +123,16 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/BootSideMenu.js"></script>
-  <script src="js/main.js"></script>
+  <!-- <script src="js/BootSideMenu.js"></script> -->
+    <!-- ol-ext -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+    <!-- KPS scripts -->
+    <script src="js/defineLayerContainer.js"></script>
+    <script src="js/functions.js"></script>
+    <!-- storymap and timeline (prototype) -->
+    <script type="text/javascript" src="prototype/functions.js"></script>
+    <script type="text/javascript" src="prototype/data.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript" src="prototype/timeline.js"></script>
 </body>
 </html>

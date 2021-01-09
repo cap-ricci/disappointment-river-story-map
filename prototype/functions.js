@@ -86,6 +86,8 @@ fetch('http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
 
 
   function story_show(){
+    //close the sidebar
+    closeNav()
     // Add placemark
   var placemark = new ol.Overlay.Placemark();
   map.addOverlay (placemark);

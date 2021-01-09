@@ -27,20 +27,18 @@ var overlay = new ol.Overlay({
   element: document.getElementById('overlay'),
   positioning: 'bottom-center'
 });
-// Create latitude and longitude and convert them to default projection
-var trier = ol.proj.transform([6.64, 49.756], 'EPSG:4326', 'EPSG:3857');
 // Instanciate a Map, set the object target to the map DOM id
-var map = new ol.Map({
-  target: 'map'
-});
-// Define VIEW
-var view = new ol.View({
-  center: trier,
-  zoom: 10
-})
 
-map.setView(view);
-map.addLayer(baseLayer);
+// The map
+var map = new ol.Map ({
+target: 'map',
+view: new ol.View ({
+zoom: 1.5,
+center: [1000000, 166327] // start of the map 
+}),
+layers: [layers['watercolor']]
+});
+
 // add control
 map.addControl(fs_ctrl);
 map.addControl(overviewMapControl);
@@ -48,3 +46,13 @@ map.addControl(mousePositionControl);
 map.addControl(scale);
 // add Interaction
 map.addInteraction(drz);
+
+// voyage line vector layers.. added at the beginning
+//TODO probably need to be changed later
+var lines = load_lines(storylines)
+for (const key in lines) {
+  if (Object.hasOwnProperty.call(lines, key)) {
+    const element = lines[key];
+    map.addLayer(element)
+  }
+}
