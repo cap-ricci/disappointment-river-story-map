@@ -315,23 +315,3 @@ function setRadius() {
   radius = document.getElementById('radius').value;
   radiusVal.innerHTML = radius;
 }
-
-// format nicely Camping areas' "description" field
-// description field example: 
-// "c / HEINSBERG / 3H-Reisemobilstellplatz Heinsberg am Lago / Motorhomes only / Fritz Bauerstrasse 3 [14236]"
-function parseCampDescription(desc) {
-  //split in individual information
-  var values = desc.split(' / ')
-  //remove first element (unused)
-  values.shift()
-  var cardbody = document.createElement('div');
-  cardbody.setAttribute('class', 'card-body')
-  var labels = ['Place', 'Name', 'Description', 'Address']
-  cardbody.innerHTML = 
-  '<h5>' + labels[1] + ': ' + values[1] + '</h5>' +
-  '<p class="card-text">' + labels[0] + ': ' + values[0] + '</br>' +
-  labels[2] + ': ' + values[2] + '</br>' +labels[3] + ': ' + values[3] + '</p>' + 
-    '<a class="btn btn-primary" href="http://google.com/search?q=' + values[1] + ' ' + values[0] + 
-    '" target="_blank">Search it in Google</a>'
-  return cardbody
-}
