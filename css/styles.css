@@ -7,7 +7,18 @@
 }
 
 .bg-dark a {
-    color: #818181!important;
+    color: #646464!important;
+}
+
+/* TODO check if this interferes with sidebar collapse behaviour */
+/* TODO make sidebar responsive */
+#sidebar-wrapper {
+    min-width: 300px;
+}
+
+.collapse-custom {
+    padding: 10px;
+    background-color: #818181;
 }
 
 #controls-wrapper {

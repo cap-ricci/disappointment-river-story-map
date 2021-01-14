@@ -3,7 +3,7 @@
 // activeLayer = "";
 // define Layers
 layers = defineLayerContainer();
-// var baseLayer = layers[isBase];
+var baseLayer = layers[isBase];
 // // define CONTROLS
 // // var fs_ctrl = new ol.control.FullScreen();
 // // get overview map
@@ -30,15 +30,20 @@ layers = defineLayerContainer();
 // Instanciate a Map, set the object target to the map DOM id
 
 // The map
-var map = new ol.Map ({
-target: 'map',
-view: new ol.View ({
-zoom: 2.5,
-center: [1000000, 166327] // start of the map 
-}),
-layers: [layers['watercolor']]
+var map = new ol.Map({
+  target: 'map',
+  view: new ol.View({
+    zoom: 3,
+    center: [150000000, 7000000]
+  }),
+layers: [ layers['watercolor'], layers['aerial']]
 });
-
+// FIXME swipe control not working
+var ctrl = new ol.control.Swipe();
+map.addControl(ctrl);
+// // Set stamen on left
+ctrl.addLayer(layers['watercolor']);
+ctrl.addLayer(layers['aerial'], true);
 // // add control
 // // map.addControl(fs_ctrl);
 // map.addControl(overviewMapControl);
@@ -53,6 +58,6 @@ var lines = load_lines(storylines)
 for (const key in lines) {
   if (Object.hasOwnProperty.call(lines, key)) {
     const element = lines[key];
-    map.addLayer(element)
+    // map.addLayer(element)
   }
 }
