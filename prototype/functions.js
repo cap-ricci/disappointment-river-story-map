@@ -1,5 +1,9 @@
 function writeStory(json, data) {
-  var first_feature = json.features[0];
+  var features = json.features
+  //sort json by objectid
+  features.sort((a, b) => parseFloat(a.properties.OBJECTID) - parseFloat(b.properties.OBJECTID));
+  var first_feature = features[0];
+
   var start = '<div class="chapter" name="start"' +
               'data-lon="' + first_feature.geometry.coordinates[0] +
               '" data-lat="' + first_feature.geometry.coordinates[0] + 
@@ -8,7 +12,7 @@ function writeStory(json, data) {
               '</p><div class="ol-scroll-next"><span>Start</span></div></div>'
   var html = $('<div id="storySource"></div>');
   html.append(start)
-  json.features.forEach(function (e) {
+  features.forEach(function (e) {
           var prop = e.properties
           var lonlat = e.geometry.coordinates
           var title = prop.geo_name
@@ -28,9 +32,11 @@ function writeStory(json, data) {
               'src': prop.img
           })
           chapter.append(image)
+          // TODO need to change to scroll top for last element
           chapter.append($(
-              '<p>' + prop.text + '</p>'
-          ))
+            '<p>' + prop.text + '</p>' +
+            '<div class="ol-scroll-next"><span>Next</span></div>'
+        ))
           html.append(chapter)
 
       })
@@ -65,7 +71,7 @@ var featureRequest = new ol.format.WFS().writeGetFeature({
 fetch('http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
 'version=1.1.0' +
 '&request=GetFeature' +
-'&typename=explore:' + + element.points_name +
+'&typename=explore:' + element.points_name +
 '&outputFormat=application/json', {
   method: 'POST',
   body: new XMLSerializer().serializeToString(featureRequest),
@@ -79,7 +85,8 @@ fetch('http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
     $('#story').empty();
     $('#story').append(html)
     $(".options").empty();
-    $('.options').append(chapters)
+    // write chapters is not working atm
+    // $('.options').append(chapters)
     story_show();
   });
 }
