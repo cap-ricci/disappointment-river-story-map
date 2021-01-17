@@ -25,7 +25,8 @@
   <script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
   <script
     src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
-    <!-- <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script> -->
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
     <!-- ol-ext -->
   <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 
@@ -97,7 +98,7 @@
         aria-expanded="true" aria-controls="basemaps">
         Base Map
       </a>
-      <div id="basemaps" class="collapse collapse-custom" aria-labelledby="headingOne" data-parent="#sidebar-wrapper">
+      <div id="basemaps" class="collapse-custom" aria-labelledby="headingOne" data-parent="#sidebar-wrapper">
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="setBasemap('watercolor');" type="radio"
             name="basemap" id="exampleRadios1" value="option1" checked>
@@ -124,7 +125,7 @@
         aria-expanded="true" aria-controls="layers">
         Layers
       </a>
-      <div id="layers" class="collapse collapse-custom" aria-labelledby="headingTwo" data-parent="#sidebar-wrapper">
+      <div id="layers" class=" collapse-custom" aria-labelledby="headingTwo" data-parent="#sidebar-wrapper">
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('OW_precipitation');" type="checkbox"
             name="basemap" id="exampleRadios1" value="option1" checked>
@@ -135,21 +136,15 @@
       </div>
       <a class="list-group-item list-group-item-action bg-dark" data-toggle="collapse" data-target="#timelines"
         aria-expanded="true" aria-controls="timelines">
-        Timeline
+        Controllers
       </a>
-      <div id="timelines" class="collapse collapse-custom" aria-labelledby="headingTimeline" data-parent="#sidebar-wrapper">
-        <div>
-          <a href="#" class="" title="timeline"
-        onclick="start_timelines();">Events timeline</a>
-        </div>
-        <div>
-          <a href="#" class="" title="timeline" ;
-        onclick="show_arctic_map();">Ice timeline</a>
-        </div>
+      <div id="timelines" class="" aria-labelledby="headingTimeline" data-parent="#sidebar-wrapper">
+        <ul>
+          <li onclick="start_timelines();">Events timeline</li>
+          <li onclick="show_arctic_map();">Ice timeline</li>
+          <li onclick="mapSlider()">Map slider</li>
+          </ul>
       </div>
-      <a class="list-group-item list-group-item-action bg-dark">
-        Map slider
-      </a>
     </div>
     <div id="page-content-wrapper">
       <!----------------------------- Page Content -------------------------------->
@@ -194,7 +189,7 @@
   <script src="js/main.js"></script>
   <script type="text/javascript" src="prototype/timeline.js"></script>
   <script type="text/javascript" src="js/ice-timeline.js"></script>
-  <!-- <script type="text/javascript" src="js/map-slider.js"></script> -->
+  <script type="text/javascript" src="js/mapSlider.js"></script>
 </body>
 
 </html>

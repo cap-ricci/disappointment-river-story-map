@@ -33,17 +33,12 @@ var baseLayer = layers[isBase];
 var map = new ol.Map({
   target: 'map',
   view: new ol.View({
+    projection: "EPSG:3857",
     zoom: 3,
     center: [150000000, 7000000]
   }),
-layers: [ layers['watercolor'], layers['aerial']]
+layers: [ layers['watercolor']]
 });
-// FIXME swipe control not working
-var ctrl = new ol.control.Swipe();
-map.addControl(ctrl);
-// // Set stamen on left
-ctrl.addLayer(layers['watercolor']);
-ctrl.addLayer(layers['aerial'], true);
 // // add control
 // // map.addControl(fs_ctrl);
 // map.addControl(overviewMapControl);

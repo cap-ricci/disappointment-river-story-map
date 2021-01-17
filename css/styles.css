@@ -13,14 +13,41 @@
 /* TODO check if this interferes with sidebar collapse behaviour */
 /* TODO make sidebar responsive */
 #sidebar-wrapper {
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .collapse-custom {
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     background-color: #818181;
 }
 
+#timelines > ul {
+    padding: 0px!important;
+    margin: 0px!important;
+    background-color: #818181;
+}
+#timelines > ul > li {
+    color: black;
+    cursor: pointer;
+    list-style: none;
+    padding: 10px 10px 10px 20px;
+}
+#timelines > ul > li:hover {
+    background-color: #616060;
+}
+.list-group-item {
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+.btn-toggle-dark-true {
+    background-color: #00000080!important;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white!important
+}
 #controls-wrapper {
     padding: 10px;
 }
@@ -30,10 +57,6 @@
     border: 1px solid gray;
     border-radius: 20%;
     background-color: lightgray;
-}
-
-#campInfo {
-    padding: 10px;
 }
 
 .row {
