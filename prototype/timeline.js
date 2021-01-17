@@ -1,10 +1,17 @@
 // load point features for timeline
-// TODO change this to load arbitrary shapefiles
+function chainRequest(list) {
+  var typenames = [];
+  for(const key in list){
+    elem = list[key];
+    typenames.push(elem.points_name);
+  }
+  return typenames.join(',')
+}
 var allPointsSource = new ol.source.Vector({
     url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
      'version=1.1.0' +
        '&request=GetFeature' +
-       '&typename=explore:' + storylines['cook'].points_name + ',' + storylines['hearne'].points_name +
+       '&typename=explore:' + chainRequest(storylines) +
      '&outputFormat=application/json',
     format: new ol.format.GeoJSON()
 });
