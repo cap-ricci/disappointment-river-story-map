@@ -128,10 +128,19 @@
       </a>
       <div id="layers" class=" collapse-custom" aria-labelledby="headingTwo" data-parent="#sidebar-wrapper">
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('OW_precipitation');" type="checkbox"
-            name="basemap" id="exampleRadios1" value="option1" checked>
+           <!-- TODO make it a real checkbox -->
+          <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('relief');" type="checkbox"
+            name="basemap" id="exampleRadios1" value="option1">
           <label class="form-check-label" for="exampleRadios1">
-            Layer
+            Canadian relief
+          </label>
+        </div>
+       
+        <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('surface_temp');" type="checkbox"
+            name="basemap" id="exampleRadios1" value="option1">
+          <label class="form-check-label" for="exampleRadios1">
+            Surface temperature
           </label>
         </div>
       </div>

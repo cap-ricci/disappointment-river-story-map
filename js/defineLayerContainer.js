@@ -58,8 +58,21 @@ function defineLayerContainer() {
         'GoogleMapsCompatible_Level6/{z}/{y}/{x}.png'
     })
   });
+
+  // Canadian Digital Elevation Model, Color Shaded Relief
+  layers['relief'] = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+		url: 'https://maps.geogratis.gc.ca/wms/elevation_en',
+		crossOrigin: 'anonymous',
+		params: {'LAYERS': 'cdem.color-shaded-relief', 'TILED': true},
+		serverType: 'mapserver'
+	})
+  });
+
+  
   return layers;
 
 }
 
+ 
 //TODO move all layers here

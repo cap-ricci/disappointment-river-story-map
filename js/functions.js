@@ -50,19 +50,19 @@ function addOverlay(omap) {
   Layer = layers[omap];
   //alert(omap);
   window.topLayer = omap;
-  Layer.setZIndex(zindex += 1);
+  // Layer.setZIndex(zindex += 1);
   map.addLayer(Layer);
   //map.render();
-  overlays.push(omap);
-  updateControls();
-  if (typeof (selectInteraction) !== 'undefined') {
-    map.removeInteraction(selectInteraction)
-  }
-  if (typeof (layers[omap]).selected !== 'undefined') {
-    selectInteraction = defineSelect(omap);
-    map.getInteractions().extend([selectInteraction])
-  }
-  infoDiv.innerHTML = '';
+  // overlays.push(omap);
+  // updateControls();
+  // if (typeof (selectInteraction) !== 'undefined') {
+  //   map.removeInteraction(selectInteraction)
+  // }
+  // if (typeof (layers[omap]).selected !== 'undefined') {
+  //   selectInteraction = defineSelect(omap);
+  //   map.getInteractions().extend([selectInteraction])
+  // }
+  // infoDiv.innerHTML = '';
 };
 
 // update control view of current overlays
