@@ -1,3 +1,18 @@
+  // Create Timeline control
+  var tline = new ol.control.Timeline({
+    className: 'ol-pointer',
+    features: [{
+      text: 'Arctic Ice Sheet',
+      date: new Date('1979/01/01'),
+      endDate: new Date('2022/12/31')
+    }],
+    graduation: 'year', // 'month'
+    minDate: new Date('1975/06/01'),
+    maxDate: new Date('2021/12/31'),
+    getHTML: function (f) { return 'Arctic Ice Sheet'; },
+    getFeatureDate: function (f) { return f.date; },
+    endFeatureDate: function (f) { return f.endDate }
+  });
 function show_arctic_map() {
   
   if (!clicked){
@@ -53,21 +68,21 @@ function show_arctic_map() {
   map.addLayer(vector);
 
 
-  // Create Timeline control
-  var tline = new ol.control.Timeline({
-    className: 'ol-pointer',
-    features: [{
-      text: 'Arctic Ice Sheet',
-      date: new Date('1979/01/01'),
-      endDate: new Date('2022/12/31')
-    }],
-    graduation: 'year', // 'month'
-    minDate: new Date('1975/06/01'),
-    maxDate: new Date('2021/12/31'),
-    getHTML: function (f) { return 'Arctic Ice Sheet'; },
-    getFeatureDate: function (f) { return f.date; },
-    endFeatureDate: function (f) { return f.endDate }
-  });
+  // // Create Timeline control
+  // var tline = new ol.control.Timeline({
+  //   className: 'ol-pointer',
+  //   features: [{
+  //     text: 'Arctic Ice Sheet',
+  //     date: new Date('1979/01/01'),
+  //     endDate: new Date('2022/12/31')
+  //   }],
+  //   graduation: 'year', // 'month'
+  //   minDate: new Date('1975/06/01'),
+  //   maxDate: new Date('2021/12/31'),
+  //   getHTML: function (f) { return 'Arctic Ice Sheet'; },
+  //   getFeatureDate: function (f) { return f.date; },
+  //   endFeatureDate: function (f) { return f.endDate }
+  // });
   map.addControl(tline);
   // Set the date when ready
   setTimeout(function () { tline.setDate('1979'); });
@@ -137,12 +152,13 @@ function show_arctic_map() {
     } else {
 
     map.removeLayer(layers['arctic_map']);
+    map.removeControl(tline);
     map.setView(new ol.View({
       projection: 'EPSG:3857',
       zoom: 3,
       center: [150000000, 7000000] // start of the map
     }));
-
     clicked = false;
+
 }
 }
