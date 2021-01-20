@@ -56,6 +56,7 @@
     function closeNav() {
       document.getElementById("tocSidenav").style.width = "0";
     }
+    var clicked = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -143,6 +144,13 @@
             Surface temperature
           </label>
         </div>
+        <div class="form-check">
+          <input class="form-check-input" title="Arctic Ice" ; onclick="toggleBtnClick();" type="checkbox"
+            name="arctic" id="exampleRadios2" value="option2" unchecked>
+          <label class="form-check-label" for="exampleRadios2">
+            Ice Timeline
+          </label>
+        </div>
       </div>
       <a class="list-group-item list-group-item-action bg-dark" data-toggle="collapse" data-target="#timelines"
         aria-expanded="true" aria-controls="timelines">
@@ -151,7 +159,6 @@
       <div id="timelines" class="" aria-labelledby="headingTimeline" data-parent="#sidebar-wrapper">
         <ul>
           <li onclick="start_timelines();">Events timeline</li>
-          <li onclick="show_arctic_map();">Ice timeline</li>
           <li onclick="mapSlider()">Map slider</li>
           </ul>
       </div>
