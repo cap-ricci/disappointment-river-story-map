@@ -68,6 +68,18 @@ function defineLayerContainer() {
 		serverType: 'mapserver'
 	})
   });
+	
+// Arctic Web Map
+    var attribution = new ol.control.Attribution({
+    html: 'Map &copy; <a href="https://arcticconnect.ca/">ArcticConnect</a>. Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+
+  layers['arctic_map'] = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          attributions: [attribution],
+          url: 'http://tiles.arcticconnect.ca/osm_3573/{z}/{x}/{y}.png'
+        })
+      });
 
   
   return layers;

@@ -1,4 +1,7 @@
 function show_arctic_map() {
+  
+  if (!clicked){
+  
   // TODO clear data before updating
   proj4.defs("EPSG:3573", "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs");
 
@@ -13,7 +16,7 @@ function show_arctic_map() {
     zoom: 3.5,
     minZoom: 1
   }));
-
+  /*
   var arctic_map =
     new ol.layer.Tile({
       source: new ol.source.XYZ({
@@ -22,7 +25,7 @@ function show_arctic_map() {
       }),
       visible: true,
     });
-
+  */ 
 
   var vectorSource = new ol.source.Vector({
     url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
@@ -46,7 +49,7 @@ function show_arctic_map() {
     style: oldstyle
   });
 
-  map.addLayer(arctic_map)
+  map.addLayer(layers['arctic_map'])
   map.addLayer(vector);
 
 
@@ -131,4 +134,15 @@ function show_arctic_map() {
     tline.element.classList.add('running');
     running = setTimeout(function () { go(true); }, 250);
   }
+    } else {
+
+    map.removeLayer(layers['arctic_map']);
+    map.setView(new ol.View({
+      projection: 'EPSG:3857',
+      zoom: 3,
+      center: [150000000, 7000000] // start of the map
+    }));
+
+    clicked = false;
+}
 }
