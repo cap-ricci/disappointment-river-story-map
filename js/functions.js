@@ -315,3 +315,14 @@ function setRadius() {
   radius = document.getElementById('radius').value;
   radiusVal.innerHTML = radius;
 }
+
+/// toggle checkbox for display of sea ice extent
+function toggleBtnClick() {
+  if (clicked) {
+    show_arctic_map();
+    clicked = false;
+  } else {
+    show_arctic_map();
+    clicked = true;
+  }
+}
