@@ -317,6 +317,7 @@ function setRadius() {
 }
 
 /// toggle checkbox for display of sea ice extent
+// TODO this can be used for the Layers checkboxes
 function toggleBtnClick() {
   if (clicked) {
     show_arctic_map();
@@ -326,3 +327,58 @@ function toggleBtnClick() {
     clicked = true;
   }
 }
+
+function openNav() {
+  document.getElementById("tocSidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("tocSidenav").style.width = "0";
+}
+
+// alternative using radio buttons
+function controlOn(controlName) {
+  switch(controlName) {
+    case 'ice-timeline':
+      show_arctic_map();
+      break;
+    case 'events-timeline':
+      start_timelines();
+      break;
+    case 'storymap':
+      //ask user which storymap -> open hidden side panel
+      //potential hole bcs use might not choose a storymap
+      openNav();
+    break;
+    case 'map-slider':
+      //TODO implement show_map_slider()
+      show_map_slider();
+      break;
+    default:
+      //do nothing
+  }
+} 
+
+
+function controlOff(controlName) {
+  switch(controlName) {
+    case 'ice-timeline':
+      noshow_arctic_map();
+      break;
+    case 'events-timeline':
+      //TODO implement
+      stop_timelines();
+      break;
+    case 'storymap':
+      //TODO implement
+      noshow_storymap()
+    break;
+    case 'map-slider':
+      //TODO implement noshow_map_slider()
+      noshow_map_slider();
+      break;
+    default:
+      //do nothing
+  }
+} 
+

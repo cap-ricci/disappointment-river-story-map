@@ -47,20 +47,13 @@
 <body>
   <script>
     // SET DEFAULT VALUES
-    var isBase = 'aerial';
-    // TODO move in main.js
-    function openNav() {
-      document.getElementById("tocSidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-      document.getElementById("tocSidenav").style.width = "0";
-    }
+    var isBase = 'aerial';  
     var clicked = false;
   </script>
 
   <!-- ToC sidebar -->
   <div id="tocSidenav" class="sidenav">
+    <h3>Choose storyline:</h3>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#" title="story" onclick="story_init('cook');">Cook's third journey - 1771-1773</a>
     <a href="#" ; title="story" ; onclick="story_init('hearne');">Hearne's exploration of Coppermine River</a>
@@ -69,7 +62,7 @@
   <nav class="navbar navbar-expand-lg static-top navbar-custom">
     <div class="container-fluid">
 
-      <a style="cursor: pointer;" onclick="openNav()">&#9776; Show storylines</a>
+      <!-- <a style="cursor: pointer;" onclick="openNav()">&#9776; Show storylines</a> -->
 
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -95,72 +88,83 @@
   <div class="d-flex" id="wrapper">
     <!-- controllers Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-      <!-- <div class="sidebar-heading">Controllers</div> -->
-      <a class="list-group-item list-group-item-action bg-dark" data-toggle="collapse" data-target="#basemaps"
-        aria-expanded="true" aria-controls="basemaps">
+      <a class="list-group-item list-group-item-action bg-dark" >
         Base Map
       </a>
-      <div id="basemaps" class="collapse-custom" aria-labelledby="headingOne" data-parent="#sidebar-wrapper">
+      <div id="basemaps" class="collapse-custom">
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="setBasemap('watercolor');" type="radio"
-            name="basemap" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
+            name="basemap" id="watercolor" checked>
+          <label class="form-check-label" for="watercolor">
             Stamen Watercolor
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" title="World Topo Map" ; onclick="setBasemap('aerial');" type="radio"
-            name="basemap" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
+            name="basemap" id="aerial" >
+          <label class="form-check-label" for="aerial">
             BING Aerial with labels
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Stamen Toner" ; onclick="setBasemap('terrain');" type="radio"
-            name="basemap" id="exampleRadios4" value="option4">
-          <label class="form-check-label" for="exampleRadios4">
+            name="basemap" id="toner">
+          <label class="form-check-label" for="toner">
             Stamen Terrain
           </label>
         </div>
       </div>
-      <a class="list-group-item list-group-item-action bg-dark" data-toggle="collapse" data-target="#layers"
-        aria-expanded="true" aria-controls="layers">
+      <a class="list-group-item list-group-item-action bg-dark">
         Layers
       </a>
-      <div id="layers" class=" collapse-custom" aria-labelledby="headingTwo" data-parent="#sidebar-wrapper">
+      <div id="layers" class=" collapse-custom">
         <div class="form-check">
-           <!-- TODO make it a real checkbox -->
+           <!-- TODO make it a real checkbox i.e. implement uncheck, use toggleBtnClick function -->
           <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('relief');" type="checkbox"
-            name="basemap" id="exampleRadios1" value="option1">
-          <label class="form-check-label" for="exampleRadios1">
+            name="layer" id="relief">
+          <label class="form-check-label" for="relief">
             Canadian relief
           </label>
         </div>
-       
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('surface_temp');" type="checkbox"
-            name="basemap" id="exampleRadios1" value="option1">
-          <label class="form-check-label" for="exampleRadios1">
+          <input class="form-check-input" title="Open Street Map" onclick="addOverlay('surface_temp');" type="checkbox"
+            name="layer" id="surface_temp">
+          <label class="form-check-label" for="surface_temp">
             Surface temperature
           </label>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Arctic Ice" ; onclick="toggleBtnClick();" type="checkbox"
+        <!-- ice timeline moved to controllers -->
+        <!-- <div class="form-check">
+          <input class="form-check-input" title="Arctic Ice" ; onclick="toggleBtnClick(show_arctic_map, noshow_arctic_map);" type="checkbox"
             name="arctic" id="exampleRadios2" value="option2" unchecked>
           <label class="form-check-label" for="exampleRadios2">
             Ice Timeline
           </label>
-        </div>
+        </div> -->
       </div>
-      <a class="list-group-item list-group-item-action bg-dark" data-toggle="collapse" data-target="#timelines"
-        aria-expanded="true" aria-controls="timelines">
+      <a class="list-group-item list-group-item-action bg-dark">
         Controllers
       </a>
-      <div id="timelines" class="" aria-labelledby="headingTimeline" data-parent="#sidebar-wrapper">
-        <ul>
-          <li onclick="start_timelines();">Events timeline</li>
-          <li onclick="mapSlider()">Map slider</li>
-          </ul>
+      <div id="controllers" class="collapse-custom">
+        TODO make labels
+          <div class="form-radio">
+            <input type="radio" name="myRadios"  value="none" id="none"/>
+            <label class="form-check-label" for="none">
+              None
+            </label>
+          </div>
+          <div class="form-radio">
+          <input type="radio" name="myRadios"  value="storymap" />Storymap
+          </div>
+          <div class="form-radio">
+            <input type="radio" name="myRadios"  value="ice-timeline" />Ice Timeline
+          </div>
+          <div class="form-radio">
+            <input type="radio" name="myRadios"  value="events-timeline" />Events Timeline
+          </div>
+          <div class="form-radio">
+            <input type="radio" name="myRadios"  value="map-slider" />Map Slider
+          </div>
       </div>
     </div>
     <div id="page-content-wrapper">
@@ -185,7 +189,6 @@
   <!-- Bootstrap, jQuery, plugins scripts -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -193,20 +196,33 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- <script src="js/BootSideMenu.js"></script> -->
   <!-- ol-ext -->
   <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
   <!-- KPS scripts -->
   <script src="js/defineLayerContainer.js"></script>
   <script src="js/functions.js"></script>
-  <!-- storymap and timeline (prototype) -->
-  <script type="text/javascript" src="prototype/functions.js"></script>
-  <script type="text/javascript" src="prototype/data.js"></script>
+  <!-- controllers -->
+  <script type="text/javascript" src="js/storymap.js"></script>
+  <script type="text/javascript" src="js/data.js"></script>
   <script src="js/main.js"></script>
-  <script type="text/javascript" src="prototype/timeline.js"></script>
+  <script type="text/javascript" src="js/timeline.js"></script>
   <script type="text/javascript" src="js/ice-timeline.js"></script>
   <script type="text/javascript" src="js/mapSlider.js"></script>
+  <script>
+    // TODO move in main
+    var rad = $('.form-radio');
+    var previous = null;
+    for (var i = 0; i < rad.length; i++) {
+        rad[i].children[0].addEventListener('change', function() {
+            (previous) ? controlOff(previous.value): null;
+            if (this !== previous) {
+                previous = this;
+            }
+            controlOn(this.value)
+        });
+    }
+  </script>
 </body>
 
 </html>

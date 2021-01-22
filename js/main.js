@@ -68,7 +68,7 @@ fetch('https://native-land.ca/api/index.php?maps=territories')
   "type": "FeatureCollection",
   "features": json
  }
- console.log(geoJSON)
+//  console.log(geoJSON) success
   })
 
  

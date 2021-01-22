@@ -1,3 +1,4 @@
+// first define layers and controls globally
 // load point features for timeline
 function chainRequest(list) {
   var typenames = [];
@@ -7,13 +8,15 @@ function chainRequest(list) {
   }
   return typenames.join(',')
 }
+
+// TODO change variable name
 var allPointsSource = new ol.source.Vector({
-    url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
-     'version=1.1.0' +
-       '&request=GetFeature' +
-       '&typename=explore:' + chainRequest(storylines) +
-     '&outputFormat=application/json',
-    format: new ol.format.GeoJSON()
+  url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
+    'version=1.1.0' +
+      '&request=GetFeature' +
+      '&typename=explore:' + chainRequest(storylines) +
+    '&outputFormat=application/json',
+  format: new ol.format.GeoJSON()
 });
 var allPoints = new ol.layer.Vector({
   name: 'points',
@@ -160,12 +163,18 @@ tline.addButton({
     tline.setDate(date);
   }
 })
+
+
 // TIMELINE function
 // TODO change name
+// display layers and control when it is selected
 function start_timelines() {
-// map.removeControl(story);
-$(".options").empty();
-$("#story").empty();
-map.addLayer(allPoints);
-map.addControl(tline);
+  map.addLayer(allPoints);
+  map.addControl(tline);
+}
+
+function stop_timelines(){
+  map.removeControl(tline);
+  // TODO change allPoints into a parameter?
+  map.removeLayer(allPoints);
 }
