@@ -48,7 +48,8 @@
   <script>
     // SET DEFAULT VALUES
     var isBase = 'aerial';  
-    var clicked = false;
+    var clicked_relief = false;
+    var clicked_temp = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -119,14 +120,14 @@
       </a>
       <div id="layers" class=" collapse-custom">
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick('relief');" type="checkbox"
+          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
             name="layer" id="relief">
           <label class="form-check-label" for="relief">
             Canadian relief
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClick('surface_temp');" type="checkbox"
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox"
             name="layer" id="surface_temp">
           <label class="form-check-label" for="surface_temp">
             Surface temperature
