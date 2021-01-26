@@ -50,6 +50,7 @@
     var isBase = 'aerial';  
     var clicked_relief = false;
     var clicked_temp = false;
+    var clicked_info = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -133,6 +134,13 @@
             Surface temperature
           </label>
         </div>
+         <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
+            name="layer" id="info_layer">
+          <label class="form-check-label" for="info_layer">
+            Information points
+          </label>
+        </div>
         <!-- ice timeline moved to controllers -->
         <!-- <div class="form-check">
           <input class="form-check-input" title="Arctic Ice" ; onclick="toggleBtnClick(show_arctic_map, noshow_arctic_map);" type="checkbox"
@@ -209,6 +217,7 @@
   <script type="text/javascript" src="js/timeline.js"></script>
   <script type="text/javascript" src="js/ice-timeline.js"></script>
   <script type="text/javascript" src="js/mapSlider.js"></script>
+  <script type="text/javascript" src="js/info-layer.js"></script>
   <script>
     // TODO move in main
     var rad = $('.form-radio');
