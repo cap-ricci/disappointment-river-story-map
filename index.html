@@ -48,7 +48,9 @@
   <script>
     // SET DEFAULT VALUES
     var isBase = 'aerial';  
-    var clicked = false;
+    var clicked_relief = false;
+    var clicked_temp = false;
+    var clicked_info = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -119,18 +121,24 @@
       </a>
       <div id="layers" class=" collapse-custom">
         <div class="form-check">
-           <!-- TODO make it a real checkbox i.e. implement uncheck, use toggleBtnClick function -->
-          <input class="form-check-input" title="Open Street Map" ; onclick="addOverlay('relief');" type="checkbox"
+          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
             name="layer" id="relief">
           <label class="form-check-label" for="relief">
             Canadian relief
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="addOverlay('surface_temp');" type="checkbox"
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox"
             name="layer" id="surface_temp">
           <label class="form-check-label" for="surface_temp">
             Surface temperature
+          </label>
+        </div>
+         <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
+            name="layer" id="info_layer">
+          <label class="form-check-label" for="info_layer">
+            Information points
           </label>
         </div>
         <!-- ice timeline moved to controllers -->
@@ -209,6 +217,7 @@
   <script type="text/javascript" src="js/timeline.js"></script>
   <script type="text/javascript" src="js/ice-timeline.js"></script>
   <script type="text/javascript" src="js/mapSlider.js"></script>
+  <script type="text/javascript" src="js/info-layer.js"></script>
   <script>
     // TODO move in main
     var rad = $('.form-radio');

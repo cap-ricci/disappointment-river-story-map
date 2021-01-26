@@ -316,16 +316,33 @@ function setRadius() {
   radiusVal.innerHTML = radius;
 }
 
-/// toggle checkbox for display of sea ice extent
-// TODO this can be used for the Layers checkboxes
-function toggleBtnClick() {
+/// toggle checkbox for display of layers, add further if conditions for integration of more layers
+function toggleBtnClick(clicked, layer) {
   if (clicked) {
-    show_arctic_map();
-    clicked = false;
-  } else {
-    show_arctic_map();
-    clicked = true;
+      if (layer == 'surface_temp') {
+      clicked_temp = false;
+  } else if (layer == 'relief') {
+      clicked_relief = false;
   }
+    deleteOverlay(layer);
+  } else {
+    addOverlay(layer);
+    if (layer == 'surface_temp') {
+    clicked_temp = true;
+} else if (layer == 'relief') {
+    clicked_relief = true;
+}
+  }
+}
+
+function toggleBtnClickInfo(clicked) {
+    if (clicked) {
+        clicked_info = false;
+        hide_info_layer();
+    } else {
+        show_info_layer();
+        clicked_info = true;
+    }
 }
 
 function openNav() {
