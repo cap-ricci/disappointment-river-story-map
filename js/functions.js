@@ -335,6 +335,16 @@ function toggleBtnClick(clicked, layer) {
   }
 }
 
+function toggleBtnClickInfo(clicked) {
+    if (clicked) {
+        clicked_info = false;
+        hide_info_layer();
+    } else {
+        show_info_layer();
+        clicked_info = true;
+    }
+}
+
 function openNav() {
   document.getElementById("tocSidenav").style.width = "250px";
 }
