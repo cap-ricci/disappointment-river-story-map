@@ -55,7 +55,9 @@ select.getFeatures().on(['remove'], function(e) {
  }
 
  function hide_info_layer() {
+     popup.hide();
+     select.getFeatures().clear();
      map.removeLayer(infoLayer);
-     map.deleteOverlay(popup);
      map.removeInteraction(select);
+     map.deleteOverlay(popup);
  }
