@@ -107,3 +107,60 @@
 	border-bottom-right-radius: unset;
 	border-right: unset;
 }
+
+
+.ol-popup {
+  max-width:300px;
+  min-width:100px;
+  min-height:1em;
+}
+/* Image on popup */
+.ol-popup img {
+  float: left;
+  margin: 0 0.5em 0 0;
+  max-width: 100px;
+  max-height: 100px;
+}
+/* no image content tooltips */
+.ol-popup.tooltips img {
+  display:none;
+}
+/* Custom red style (tips) */
+.ol-popup.red > div {
+  background-color: red;
+}
+.ol-popup.red .anchor {
+  color: red;
+}
+
+/* Custom orange style (tips) */
+.ol-popup.tips.orange > div {
+  border-color:#da7;
+  background-color:#eca;
+}
+.ol-popup.tips.orange .anchor {
+  color: #da7;
+}
+
+/* orange style (default) */
+.ol-popup.default.orange > div {
+  border:4px solid #f96;
+}
+.ol-popup.default.orange .anchor {
+  margin: -10px 22px;
+}
+.ol-popup.default.orange .anchor::after {
+  margin: 5px -11px;
+}
+.ol-popup-middle.default.orange .anchor::after {
+  margin: -10.5px -27px /*border:4 +2 px */;
+}
+.ol-popup.default.orange .anchor {
+  color: #f96;
+}
+.ol-popup.default.orange .closeBox {
+  background-color: rgba(255, 153, 102, 0.7);
+}
+.ol-popup.default.orange .closeBox:hover {
+  background-color: rgba(255, 153, 102, 1);
+}
