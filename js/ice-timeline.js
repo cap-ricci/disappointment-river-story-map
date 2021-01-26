@@ -21,7 +21,7 @@ var ice_extent_vector = new ol.layer.Vector({
   style: oldstyle
 });
 // Create Timeline control
-var tline = new ol.control.Timeline({
+var iceTline = new ol.control.Timeline({
   className: 'ol-pointer',
   features: [{
     text: 'Arctic Ice Sheet',
@@ -37,8 +37,8 @@ var tline = new ol.control.Timeline({
 });
 
 // Set the date when ready
-setTimeout(function () { tline.setDate('1979'); });
-tline.addButton({
+setTimeout(function () { iceTline.setDate('1979'); });
+iceTline.addButton({
   className: "go",
   title: "GO!",
   handleClick: function () {
@@ -54,8 +54,8 @@ var newstyle =
     })
   });
 // Show features on scroll
-tline.on('scroll', function (e) {
-  var d = tline.roundDate(e.date, 'year')
+iceTline.on('scroll', function (e) {
+  var d = iceTline.roundDate(e.date, 'year')
   $('.dateStart').text(d.toLocaleDateString(undefined, { year: 'numeric' }));
   // Filter features visibility
   ice_extent_source.getFeatures().forEach(function (f) {
@@ -74,13 +74,13 @@ var running = false;
 var start = new Date('1979');
 var end = new Date('2020');
 function go(next) {
-  var date = tline.getDate();
+  var date = iceTline.getDate();
   if (running) clearTimeout(running);
   if (!next) {
     // stop
     if (date > start && date < end && running) {
       running = false;
-      tline.element.classList.remove('running');
+      iceTline.element.classList.remove('running');
       return;
     }
     if (date > end) {
@@ -88,7 +88,7 @@ function go(next) {
     }
   }
   if (date > end) {
-    tline.element.classList.remove('running');
+    iceTline.element.classList.remove('running');
     return;
   }
   if (date < start) {
@@ -96,9 +96,9 @@ function go(next) {
   }
   // 1 year
   date = new Date(date.getTime() + 24 * 60 * 60 * 1000 * 365);
-  tline.setDate(date, { anim: false });
+  iceTline.setDate(date, { anim: false });
   // next
-  tline.element.classList.add('running');
+  iceTline.element.classList.add('running');
   running = setTimeout(function () { go(true); }, 250);
 }
 
@@ -116,13 +116,13 @@ function show_arctic_map() {
 
   map.addLayer(layers['arctic_map'])
   map.addLayer(ice_extent_vector);
-  map.addControl(tline);
+  map.addControl(iceTline);
 }
 
 //remove layers and control when another control is selected
 function noshow_arctic_map() {
   map.removeLayer(layers['arctic_map']);
-  map.removeControl(tline);
+  map.removeControl(iceTline);
   map.setView(new ol.View({
     projection: 'EPSG:3857',
     zoom: 3,

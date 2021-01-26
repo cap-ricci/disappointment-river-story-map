@@ -12,7 +12,7 @@ function writeStory(json, data) {
               '</p><div class="ol-scroll-next"><span>Start</span></div></div>'
   var html = $('<div id="storySource"></div>');
   html.append(start)
-  features.forEach(function (e) {
+  features.forEach(function (e, idx) {
           var prop = e.properties
           var lonlat = e.geometry.coordinates
           var title = prop.geo_name
@@ -32,12 +32,21 @@ function writeStory(json, data) {
               'src': prop.img
           })
           chapter.append(image)
-          // TODO need to change to scroll top for last element
-          chapter.append($(
+          // TODO define img-caption class
+          chapter.append($('<p class="img-caption">'+prop.img_captio+'</p>'))
+          if(idx === features.length-1) {
+            chapter.append($(
+              '<p>' + prop.text + '</p>' +
+              '<div class="ol-scroll-top"><span>Top</span></div>'
+            ))
+          }
+          else {
+            chapter.append($(
             '<p>' + prop.text + '</p>' +
             '<div class="ol-scroll-next"><span>Next</span></div>'
-        ))
-          html.append(chapter)
+            ))
+          }
+                    html.append(chapter)
 
       })
   
