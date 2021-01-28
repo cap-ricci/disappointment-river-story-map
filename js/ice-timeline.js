@@ -122,6 +122,7 @@ function show_arctic_map() {
 //remove layers and control when another control is selected
 function noshow_arctic_map() {
   map.removeLayer(layers['arctic_map']);
+  map.removeLayer(ice_extent_vector);
   map.removeControl(iceTline);
   map.setView(new ol.View({
     projection: 'EPSG:3857',
