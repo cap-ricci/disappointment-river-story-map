@@ -1,3 +1,14 @@
+/* TODO check if this interferes with sidebar collapse behaviour */
+/* TODO make sidebar responsive */
+#sidebar-wrapper {
+  min-width: 250px;
+}
+
+.sidebar-section-content {
+  padding: 10px 10px 10px 20px;
+  background-color: #818181;
+}
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -81,4 +92,20 @@ margin-left: 0;
 #wrapper.toggled #sidebar-wrapper {
   margin-left: -15rem;
 }
+}
+
+.list-group-item {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.btn-toggle-dark-true {
+  background-color: #00000080!important;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white!important
+}
+#controls-wrapper {
+  padding: 10px;
 }
