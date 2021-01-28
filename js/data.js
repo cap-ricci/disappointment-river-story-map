@@ -1,6 +1,7 @@
 var storylines = {
     "cook" : {
         'title': 'Cook\'s third voyage',
+        'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Captainjamescookportrait.jpg/1200px-Captainjamescookportrait.jpg" alt="Captainjamescookportrait.jpg">',
         'description': 'Follow Cook\'s journey in a story map.<br/><span style="font-size: .8em;">text & images &copy; Wikipedia</span>',
         "lines_name": 'CookLine',
         "points_name": 'cookPoints',
@@ -9,7 +10,8 @@ var storylines = {
     },
     "hearne" : {
         'title': 'Coppermine River exploration',
-        'description': 'Follow Samuel Hearne\'s exploarion of the Coppermine Rive with native Chipewyan chief Matonabbee.',
+        'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Samuel_Hearne_-_Project_Gutenberg_etext_20110.jpg" alt="Samuel Hearne - Project Gutenberg etext 20110.jpg">',
+        'description': 'Follow Samuel Hearne\'s exploarion of the Coppermine River with native Chipewyan chief Matonabbee.',
         'lines_name': 'hearneLine',
         'points_name': 'hearnePoints',
         "timeline_start": '<div class="chapter" name="start" data-lon="-4.160823358060026" data-lat="50.326446898130285" data-zoom="4" data-animation="flyto"><h2>The third Cook Voyage 1776 - 1779</h2><p>Follow Cook\'s journey in a story map.<br/><span style="font-size: .8em;">text & images &copy; Wikipedia</span></p><div class="ol-scroll-next"><span>Start</span></div></div>',

@@ -158,6 +158,10 @@ background-color: rgba(255,255,255,.8);
 cursor: pointer;
 }
 
+.img-caption {
+  font-style: italic;
+}
+
 /* TODO not used? */
 /* Dropdown Button */
 .dropbtn {
