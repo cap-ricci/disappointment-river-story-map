@@ -30,9 +30,7 @@ var popup = new ol.Overlay.Popup (
 // Control Select
 var select = new ol.interaction.Select({});
 
-// On selected => show/hide popup
-select.getFeatures().on(['add'], function(e) {
-  var feature = e.element;
+function makePopupContent(feature) {
   var content = "";
   content += "<img src='"+feature.get("img")+"'/>";
   content += feature.get("text");
@@ -41,6 +39,12 @@ select.getFeatures().on(['add'], function(e) {
   if (feature.get("url") != "") {
   content += "<a href="+feature.get("url")+" title='Info'> here.</a>";
   }
+  return content;
+}
+// On selected => show/hide popup
+select.getFeatures().on(['add'], function(e) {
+  var feature = e.element;
+  var content = makePopupContent(feature);
   popup.show(feature.getGeometry().getFirstCoordinate(), content);
 });
 select.getFeatures().on(['remove'], function(e) {
@@ -59,5 +63,5 @@ select.getFeatures().on(['remove'], function(e) {
      select.getFeatures().clear();
      map.removeLayer(infoLayer);
      map.removeInteraction(select);
-     map.deleteOverlay(popup);
+     map.removeOverlay(popup);
  }

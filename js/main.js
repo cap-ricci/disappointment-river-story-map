@@ -53,8 +53,7 @@ var lines = load_lines(storylines)
 for (const key in lines) {
   if (Object.hasOwnProperty.call(lines, key)) {
     const element = lines[key];
-    // FIXME commented out bcs clashes with mapslider
-    // map.addLayer(element)
+    map.addLayer(element)
   }
 }
 

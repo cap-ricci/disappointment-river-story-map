@@ -9,8 +9,8 @@ function chainRequest(list) {
   return typenames.join(',')
 }
 
-// TODO change variable name
-var allPointsSource = new ol.source.Vector({
+
+var timelinePointsSource = new ol.source.Vector({
   url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
     'version=1.1.0' +
       '&request=GetFeature' +
@@ -18,132 +18,107 @@ var allPointsSource = new ol.source.Vector({
     '&outputFormat=application/json',
   format: new ol.format.GeoJSON()
 });
-var allPoints = new ol.layer.Vector({
+// TODO maybe style points with an icon
+var timelinePoints = new ol.layer.Vector({
   name: 'points',
-  source: allPointsSource,
-  style: style()
+  source: timelinePointsSource,
+  // style: style()
 });
 ////// TIMELINE INFORMATION
-
-// Style function
-var cache = {};
-function style(select){
-return function(f) {
-  var style = cache[f.get('img')+'-'+select];
-  if (!style) {
-    var img = new ol.style.Photo({
-      src: f.get('img'),
-      radius: select ? 20:15,
-      shadow: true,
-      stroke: new ol.style.Stroke({
-        width: 4,
-        color: select ? '#fff':'#fafafa'
-      }),
-      onload: function() { f.changed(); }
-    })
-    style = cache[f.get('img')+'-'+select] = new ol.style.Style({
-      image: img
-    })
-  }
-  return style;
-}
-};
-
-var listenerKey = allPointsSource.on('change', function(e) {
-if (allPointsSource.getState() == 'ready') {
+var listenerKey = timelinePointsSource.on('change', function(e) {
+if (timelinePointsSource.getState() == 'ready') {
   ol.Observable.unByKey(listenerKey);
   tline.refresh();
   }
   });
 
-
-
-// Create Timeline control when features are loaded
+//Timeline control
 var info = $(".options").html("");
 
 var tline = new ol.control.Timeline({
-className: 'ol-zoomhover',
-source: allPointsSource,
-graduation: 'month',
-zoomButton: true,
-// TODO improve feature display in timeline
-getHTML: function(f){
-  //return '<img src="'+f.get('img')+'"/> '+(f.get('geo_name')||'');
-  return  '<div style="'+
-      storylines[f.getId().split("Points.")[0]].timeline_html+
-      '">'+f.get('geo_name')+'</div>';
-},
-getFeatureDate: function(f) {
-  return f.get('date');
-},
-endFeatureDate: function(f) {
-  var d = f.get('endDate');
-  // Create end date
-  if (!d) {
-    d = new Date (f.get('date')); 
-    d = new Date( d.getTime() + (5 + 10*Math.random())*10*24*60*60*1000);
-    f.set('endDate', d);
+  className: 'ol-zoomhover',
+  source: timelinePointsSource,
+  graduation: 'month',
+  zoomButton: true,
+  // TODO improve feature display in timeline
+  getHTML: function(f){
+    //return '<img src="'+f.get('img')+'"/> '+(f.get('geo_name')||'');
+    return  '<div style="'+
+        storylines[f.getId().split("Points.")[0]].timeline_html+
+        '">'+f.get('geo_name')+'</div>';
+  },
+  getFeatureDate: function(f) {
+    return f.get('date');
+  },
+  endFeatureDate: function(f) {
+    var d = f.get('endDate');
+    // Create end date
+    if (!d) {
+      d = new Date (f.get('date')); 
+      d = new Date( d.getTime() + (5 + 10*10*24*60*60*1000));
+      f.set('endDate', d);
+    }
+    return d;
   }
-  return d;
-}
+});
+
+// make popup overlay
+var timelinepopup = new ol.Overlay.Popup (
+  {	popupClass: "default", //"tooltips", "warning" "black" "default", "tips", "shadow",
+    closeBox: true,
+    onshow: function(){ console.log("You opened the timeline box"); },
+    onclose: function(){ console.log("You close the timeline box"); },
+    positioning: 'top-center',
+    autoPan: true,
+    autoPanAnimation: { duration: 250 }
 });
 
 // Select a feature
 tline.on('select', function(e){
 
-// Center map on feature
-map.getView().animate({
-  center: e.feature.getGeometry().getCoordinates(),
-  zoom: 8
+  // Center map on feature
+  map.getView().animate({
+    center: e.feature.getGeometry().getCoordinates(),
+    zoom: 8
+  });
+  // Center time line on feature
+  tline.setDate(e.feature);
+  // Select feature on the map
+  timelineselect.getFeatures().clear();
+  timelineselect.getFeatures().push(e.feature);
+
+  var p = e.feature;
+  if (p) {
+    // Show info
+    var content = makePopupContent(p);
+    timelinepopup.show(p.getGeometry().getFirstCoordinate(), content);
+      } else {
+    $("#select").html("<p>Select an image.</p>");
+  }
 });
-// Center time line on feature
-tline.setDate(e.feature);
-// Select feature on the map
-select.getFeatures().clear();
-select.getFeatures().push(e.feature);
 
-var p = e.feature;
-if (p) {
-  // Show info
-  
-        $(".options").html("");
-        $("<img>").attr('src',p.get("img")).appendTo(info);
-        $("<p>").text(p.get("date")) 
-        $("<p>").text(p.get("text")).appendTo(info);
-        
-
-    } else {
-  $("#select").html("<p>Select an image.</p>");
-}
-
-
-});
 // Collapse the line
 tline.on('collapse', function(e) {
-if (e.collapsed) $('#map').addClass('noimg')
-else $('#map').removeClass('noimg')
+  if (e.collapsed) $('#map').addClass('noimg')
+  else $('#map').removeClass('noimg')
 });
 // scroll the line
 tline.on('scroll', function(e){
-$('.options .date').text(e.date.toLocaleDateString());
+  $('.options .date').text(e.date.toLocaleDateString());
 });
 // choose feature by clicking on it on the map
-var select = new ol.interaction.Select({ hitTolerance: 5, style: style(true) });
-map.addInteraction(select);
-select.on('select', function(e){
-var f = e.selected[0];
-if (f) {
-  tline.setDate(f);
-  // Show info
-        $(".options").html("");
-        $("<img>").attr('src',f.get("img")).appendTo(info);
-        $("<p>").text(f.get("date")).appendTo(info);
-        $("<p>").text(f.get("text")).appendTo(info);
-        
-
-    } else {
-  $("#select").html("<p>Select an image.</p>");
-}
+var timelineselect = new ol.interaction.Select({ hitTolerance: 5});//, style: style(true) 
+timelineselect.on('select', function(e){
+  var f = e.selected[0];
+  if (f) {
+    tline.setDate(f);
+    // Show info
+    // TODO add delay
+    var content = makePopupContent(f);
+    timelinepopup.show(f.getGeometry().getFirstCoordinate(), content);
+  } else {
+    $("#select").html("<p>Select an image.</p>");
+  }
 });
 
 // add fast scroll buttons (+- 10 yrs)
@@ -169,12 +144,16 @@ tline.addButton({
 // TODO change name
 // display layers and control when it is selected
 function start_timelines() {
-  map.addLayer(allPoints);
+  map.addInteraction(timelineselect);
+  map.addLayer(timelinePoints);
   map.addControl(tline);
+  map.addOverlay(timelinepopup);
 }
 
 function stop_timelines(){
+  map.removeInteraction(timelineselect);
   map.removeControl(tline);
-  // TODO change allPoints into a parameter?
-  map.removeLayer(allPoints);
+  // TODO change timelinePoints into a parameter?
+  map.removeLayer(timelinePoints);
+  map.removeOverlay(timelinepopup);
 }
