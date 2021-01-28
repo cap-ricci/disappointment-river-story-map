@@ -16,29 +16,29 @@ var storylines = {
         "timeline_html": 'color: red',
         "color": "red"
     },
-    "pondLife" : {
-        'title': 'Peter Pond, Athabasca\'s early explorer',
-        'description': 'Discover life and exploration of Peter Pond, a controversial figure of the 18th century, who inspired Mackenzie to search the North West Passage.',
-        'lines_name': '',
-        'points_name': 'pondLifePoints',
-        "timeline_html": 'color: green',
-        "img": '',
-        "color": "green"
-    },
-    "castner" : {
-        'title': 'Brian Castner paddling the Mackenzie river in 2016',
-        'description': '',
-        "lines_name": '',
-        "points_name": 'castnerPoints',
-        "timeline_html": 'color: black',
-        "color": "black"
-    },
-    "mackenzieLife" : {
-        'title': 'Alexander Mackenzie: from the Highlands to the North West Territories',
-        'description': '',
-        "lines_name": '',
-        "points_name": 'mackenzieLifePoints',
-        "timeline_html": 'color: black',
-        "color": "black"
-    }
+    // "pondLife" : {
+    //     'title': 'Peter Pond, Athabasca\'s early explorer',
+    //     'description': 'Discover life and exploration of Peter Pond, a controversial figure of the 18th century, who inspired Mackenzie to search the North West Passage.',
+    //     'lines_name': '',
+    //     'points_name': 'pondLifePoints',
+    //     "timeline_html": 'color: green',
+    //     "img": '',
+    //     "color": "green"
+    // },
+    // "castner" : {
+    //     'title': 'Brian Castner paddling the Mackenzie river in 2016',
+    //     'description': '',
+    //     "lines_name": '',
+    //     "points_name": 'castnerPoints',
+    //     "timeline_html": 'color: black',
+    //     "color": "black"
+    // },
+    // "mackenzieLife" : {
+    //     'title': 'Alexander Mackenzie: from the Highlands to the North West Territories',
+    //     'description': '',
+    //     "lines_name": '',
+    //     "points_name": 'mackenzieLifePoints',
+    //     "timeline_html": 'color: black',
+    //     "color": "black"
+    // }
 }
