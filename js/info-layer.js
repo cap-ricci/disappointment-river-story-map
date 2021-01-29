@@ -2,7 +2,7 @@
 // Popup overlay
 
 var popup = new ol.Overlay.Popup (
-  {	popupClass: "default", //"tooltips", "warning" "black" "default", "tips", "shadow",
+  {	popupClass: "default orange", //"tooltips", "warning" "black" "default", "tips", "shadow",
     closeBox: true,
     onshow: function(){ console.log("You opened the box"); },
     onclose: function(){ console.log("You close the box"); },
@@ -23,12 +23,23 @@ var popup = new ol.Overlay.Popup (
 
  var infoLayer = new ol.layer.Vector({
    name: 'Additional information points',
-   source: infoSource
-   //style: new ol.style.Style({ image: new ol.style.Icon({ src:"exclamation-mark.png", scale: 0.05 }) })
+   source: infoSource, 
+   style: new ol.style.Style({ image: new ol.style.Icon({ src:"info.png", scale: 0.03 }) })
  });
 
 // Control Select
-var select = new ol.interaction.Select({});
+var select = new ol.interaction.Select({
+     //condition: ol.events.condition.pointerMove,
+     style:  new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: 7,
+        fill: new ol.style.Fill({color: 'orange'}),
+        stroke: new ol.style.Stroke({
+          color: [255,0,0], width: 1
+        })
+      })
+    })
+});
 
 function makePopupContent(feature) {
   var content = "";
