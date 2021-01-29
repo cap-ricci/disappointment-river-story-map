@@ -8,7 +8,7 @@ function writeStory(json, data) {
               'data-lon="' + first_feature.geometry.coordinates[0] +
               '" data-lat="' + first_feature.geometry.coordinates[0] + 
               '" data-zoom="4" data-animation="flyto"><h2>' + data.title + 
-              '</h2><p>' + data.description + 
+              '</h2>'+ data.storymap_img +'<p>' + data.description + 
               '</p><div class="ol-scroll-next"><span>Start</span></div></div>'
   var html = $('<div id="storySource"></div>');
   html.append(start)
@@ -25,28 +25,28 @@ function writeStory(json, data) {
               'data-zoom': "6",
               'data-animation': "flyto"
           })
-          chapter.append($('<h2>' + title + '</h2>'))
-          var image = $('<img>')
-          image.attr({
-              'data-title': title,
-              'src': prop.img
-          })
-          chapter.append(image)
-          // TODO define img-caption class
-          chapter.append($('<p class="img-caption">'+prop.img_captio+'</p>'))
+          chapter.append($('<h2>' + title + '</h2>' +
+          '<img data-title='+ title +' src='+prop.img+'>'));
+          //add image caption if present
+          if(prop.img_captio){
+            chapter.append($('<p class="img-caption">'+prop.img_captio+'</p>'));
+          }
+          chapter.append($('<p>' + prop.text + '</p>'));
+          //add link to external resources if present
+          if(prop.url){
+            chapter.append($('<a href='+ prop.url +' target="_blank">'+ prop.url_text +'</a>'));
+          }
+          //add back to top button to last element
           if(idx === features.length-1) {
-            chapter.append($(
-              '<p>' + prop.text + '</p>' +
-              '<div class="ol-scroll-top"><span>Top</span></div>'
-            ))
+            // FIXME back to top button not working
+            // chapter.append($('<div class="ol-scroll-top"><span>Top</span></div>'));
+            chapter.append($('<div class="ol-scroll-next"><span>Next</span></div>'));
           }
+          //add next button to inner elements
           else {
-            chapter.append($(
-            '<p>' + prop.text + '</p>' +
-            '<div class="ol-scroll-next"><span>Next</span></div>'
-            ))
+            chapter.append($('<div class="ol-scroll-next"><span>Next</span></div>'));
           }
-                    html.append(chapter)
+          html.append(chapter);
 
       })
   
