@@ -35,6 +35,8 @@ var map = new ol.Map({
   view: new ol.View({
     projection: "EPSG:3857",
     zoom: 3,
+    maxZoom: 6,
+    minZoom:2,
     center: [150000000, 7000000]
   }),
 layers: [ layers['watercolor']]
