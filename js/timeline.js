@@ -32,6 +32,36 @@ if (timelinePointsSource.getState() == 'ready') {
   }
   });
 
+// change point colour depending on voyage 
+timelinePoints.setStyle(function(feature) {
+  let fillColor;
+  var voyage = feature.get("voyage");
+  if (voyage == 'cook') {
+    fillColor = 'lightcoral';
+} else if (voyage == 'hearne') {
+    fillColor = 'turquoise';
+} else if (voyage == 'pond') {
+    fillColor = 'cornflowerblue';
+} else if (voyage == 'castner') {
+    fillColor = 'orchid';
+} else if (voyage == 'mackenzieLife') {
+    fillColor = 'chocolate';
+} else {
+    fillColor = 'black';
+}
+
+  return new ol.style.Style({
+   image: new ol.style.Circle({
+     radius: 5,
+     fill: new ol.style.Fill({color: fillColor}),
+     stroke: new ol.style.Stroke({
+       color: [255,255,255], width: 1
+     })
+   })
+})
+});
+
+
 //Timeline control
 var info = $(".options").html("");
 
@@ -107,7 +137,21 @@ tline.on('scroll', function(e){
   $('.options .date').text(e.date.toLocaleDateString());
 });
 // choose feature by clicking on it on the map
-var timelineselect = new ol.interaction.Select({ hitTolerance: 5});//, style: style(true) 
+
+var timelineselect = new ol.interaction.Select({
+    //condition: ol.events.condition.click,
+    hitTolerance: 5,
+    style: new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 5,
+            fill: new ol.style.Fill({color: 'gold'}),
+            stroke: new ol.style.Stroke({
+              color: [255,255,255], width: 1
+            })
+          })
+        })
+});//, style: style(true)
+
 timelineselect.on('select', function(e){
   var f = e.selected[0];
   if (f) {
@@ -146,6 +190,7 @@ tline.addButton({
 function start_timelines() {
   map.addInteraction(timelineselect);
   map.addLayer(timelinePoints);
+  window.topLayer = timelinePoints; 
   map.addControl(tline);
   map.addOverlay(timelinepopup);
 }
