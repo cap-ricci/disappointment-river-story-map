@@ -48,9 +48,7 @@
   <script>
     // SET DEFAULT VALUES
     var isBase = 'watercolor';  
-    var clicked_relief = false;
-    var clicked_temp = false;
-    var clicked_info = false;
+    var clicked_relief, clicked_temp, clicked_info, clicked_lines = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -121,6 +119,19 @@
       </a>
       <div id="layers" class=" sidebar-section-content">
         <div class="form-check">
+            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
+             name="layer" id="info_layer">
+           <label class="form-check-label" for="info_layer">
+             Information points
+           </label>
+         </div>
+         <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox"
+            name="layer" id="lines_layer">
+          <label class="form-check-label" for="lines">
+            Travel lines
+          </label>
+        </div>
           <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
             name="layer" id="relief">
           <label class="form-check-label" for="relief">
@@ -132,13 +143,6 @@
             name="layer" id="surface_temp">
           <label class="form-check-label" for="surface_temp">
             Surface temperature
-          </label>
-        </div>
-         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
-            name="layer" id="info_layer">
-          <label class="form-check-label" for="info_layer">
-            Information points
           </label>
         </div>
         <!-- ice timeline moved to controllers -->
