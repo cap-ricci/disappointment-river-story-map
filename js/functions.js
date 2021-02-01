@@ -345,6 +345,38 @@ function toggleBtnClickInfo(clicked) {
     }
 }
 
+
+function toggleBtnClickLines(clicked) {
+    if (clicked) {
+        clicked_lines = false;
+        var toDelete = [];
+        for(const key in storylines){
+          elem = storylines[key];
+          toDelete.push(elem.title);
+        }
+        var layersToRemove = [];
+        map.getLayers().forEach(function (layer) {
+            if (toDelete.indexOf(layer.get('name')) >= 0) {
+                layersToRemove.push(layer);
+    }
+})
+    var len = layersToRemove.length;
+    for(var i = 0; i < len; i++) {
+        map.removeLayer(layersToRemove[i]);
+    }
+    } else {
+        var lines = load_lines(storylines)
+        for (const key in lines) {
+          if (Object.hasOwnProperty.call(lines, key)) {
+            const element = lines[key];
+            map.addLayer(element)
+          }
+        }
+        clicked_lines = true;
+    }
+}
+
+
 function openNav() {
   document.getElementById("tocSidenav").style.width = "250px";
 }
