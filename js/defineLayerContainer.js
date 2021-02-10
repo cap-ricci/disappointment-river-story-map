@@ -24,6 +24,12 @@ function defineLayerContainer() {
       layer: 'terrain'
     })
   });
+  //Define NativeLand
+  layers['native-land'] = new ol.layer.Tile({
+    source: new ol.source.OSM({
+      source: 'https://native-land.ca/api/embed/embed.html?maps=languages&name=nakota,lakota&position=42.553080,-86.473389'
+    })
+  });
 
   // Define bingLayer
   layers['aerial'] = new ol.layer.Tile({

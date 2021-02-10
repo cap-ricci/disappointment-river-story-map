@@ -32,16 +32,42 @@ function def_overviewMap() {
 function setBasemap(bmap) {
   // define new base layer
   //alert(bmap);
-  map.removeLayer(baseLayer);
+  if (bmap ==='native-land'){
+    map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11'
+      });
+  }else{
+    map = new ol.Map({
+      target: 'map',
+      view: new ol.View({
+        projection: "EPSG:3857",
+        zoom: 3,
+        maxZoom: 6,
+        minZoom:2,
+        center: [-150000000, 7000000]
+      }),
+    layers: [ layers['watercolor']]
+    });
+  }
+
+ 
   baseLayer = layers[bmap];
   map.addLayer(baseLayer);
   baseLayer.setZIndex(-10);
   map.render();
 
-  if (bmap == 'stamen') {
+  if (bmap == 'watercolor') {
     map.addLayer(layers['stamen_labels']);
     layers['stamen_labels'].setZIndex(-9);
     map.render();
+  }else if(bmap == 'aerial'){
+
+  }else if (bmap == 'native-land'){
+   
+
+  }else{
+    
   }
 };
 
