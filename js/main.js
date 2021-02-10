@@ -37,7 +37,7 @@ var map = new ol.Map({
     zoom: 3,
     maxZoom: 6,
     minZoom:2,
-    center: [150000000, 7000000]
+    center: [-150000000, 7000000]
   }),
 layers: [ layers['watercolor']]
 });
@@ -62,7 +62,7 @@ for (const key in lines) {
 */
 
 //TESTTESTTEST loads geojson from native land. how to encapsulate in a vector layer?
-fetch('https://native-land.ca/api/index.php?maps=territories')
+/*fetch('https://native-land.ca/api/index.php?maps=territories')
   .then(function (response) {
     return response.json();
   })
@@ -70,8 +70,7 @@ fetch('https://native-land.ca/api/index.php?maps=territories')
     var geoJSON = {
   "type": "FeatureCollection",
   "features": json
- }
-//  console.log(geoJSON) success
-  })
+ }  //console.log(geoJSON) success
+  })*/
 
  

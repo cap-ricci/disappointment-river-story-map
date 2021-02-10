@@ -42,11 +42,15 @@
   <!-- ol-ext -->
   <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 
+ <!--base map-->
+ <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 
 <body>
   <script>
-    // SET DEFAULT VALUES
+// SET DEFAULT VALUES
     var isBase = 'watercolor';  
     var clicked_relief, clicked_temp, clicked_info, clicked_lines = false;
   </script>
@@ -100,17 +104,25 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" title="World Topo Map" ; onclick="setBasemap('aerial');" type="radio"
+          <input class="form-check-input" title="World Topo Map"  onclick="setBasemap('aerial');" type="radio"
             name="basemap" id="aerial" >
           <label class="form-check-label" for="aerial">
             BING Aerial with labels
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" title="Stamen Toner" ; onclick="setBasemap('terrain');" type="radio"
+          <input class="form-check-input" title="Stamen Toner"  onclick="setBasemap('toner');"type="radio"
             name="basemap" id="toner">
           <label class="form-check-label" for="toner">
             Stamen Terrain
+          </label>
+        </div>
+        <!--  ; onclick="setBasemap('native-land');"-->
+        <div class="form-check">
+          <input class="form-check-input" title="Native-Land"  onclick="setBasemap('native-land');" type="radio"
+            name="basemap" id="native-land">
+          <label class="form-check-label" for="native-land">
+            Native-Land
           </label>
         </div>
       </div>
@@ -119,7 +131,7 @@
       </a>
       <div id="layers" class=" sidebar-section-content">
         <div class="form-check">
-            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
+  <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
              name="layer" id="info_layer">
            <label class="form-check-label" for="info_layer">
              Information points
@@ -240,6 +252,11 @@
         });
     }
   </script>
+  <!--basemap native-canada-->
+<div id='native-map' style='width: 400px; height: 300px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicHJhYmluYTE2IiwiYSI6ImNra2lzNjZnZzA5bWkyd3M3Mnpub284NncifQ.oMRCtfNw7UXDaXFGqwfl4w';
+</script>
 </body>
 
 </html>
