@@ -51,6 +51,7 @@ layers: [ layers['watercolor']]
 
 // voyage line vector layers.. added at the beginning
 //TODO probably need to be changed later
+/*
 var lines = load_lines(storylines)
 for (const key in lines) {
   if (Object.hasOwnProperty.call(lines, key)) {
@@ -58,6 +59,7 @@ for (const key in lines) {
     map.addLayer(element)
   }
 }
+*/
 
 //TESTTESTTEST loads geojson from native land. how to encapsulate in a vector layer?
 /*fetch('https://native-land.ca/api/index.php?maps=territories')

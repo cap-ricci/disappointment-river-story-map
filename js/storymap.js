@@ -158,7 +158,7 @@ function load_lines(storylines) {
       style: new ol.style.Style({
         stroke: new ol.style.Stroke({
           color: element.color,
-          width: 1,
+          width: 2,
         })
       })
     });
