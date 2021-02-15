@@ -345,6 +345,17 @@ function toggleBtnClickInfo(clicked) {
     }
 }
 
+	function toggleBtnClickNative(clicked) {
+	    if (clicked) {
+	        clicked_natives = false;
+	        hide_natives_layer();
+	    } else {
+	        show_natives_layer();
+	        clicked_natives = true;
+	    }
+	}
+	
+
 
 function toggleBtnClickLines(clicked) {
     if (clicked) {
