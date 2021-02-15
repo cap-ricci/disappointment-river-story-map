@@ -48,7 +48,7 @@
   <script>
     // SET DEFAULT VALUES
     var isBase = 'watercolor';  
-    var clicked_relief, clicked_temp, clicked_info, clicked_lines = false;
+    var clicked_relief, clicked_temp, clicked_info, clicked_lines, clicked_natives = false;
   </script>
 
   <!-- ToC sidebar -->
@@ -133,6 +133,13 @@
           </label>
         </div>
         <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);" type="checkbox"
+	           name="layer" id="nativesLand">
+	         <label class="form-check-label" for="lines">
+	           Native lands
+	         </label>
+	       </div>
+	        <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
             name="layer" id="relief">
           <label class="form-check-label" for="relief">
@@ -226,6 +233,7 @@
   <script type="text/javascript" src="js/ice-timeline.js"></script>
   <script type="text/javascript" src="js/mapSlider.js"></script>
   <script type="text/javascript" src="js/info-layer.js"></script>
+  <script type="text/javascript" src="js/natives-land.js"></script>
   <script>
     // TODO move in main
     var rad = $('.form-radio');
