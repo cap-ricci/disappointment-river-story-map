@@ -124,6 +124,8 @@
            <label class="form-check-label" for="info_layer">
              Information points
            </label>
+           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
+           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
          </div>
          <div class="form-check">
           <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox"
@@ -131,6 +133,8 @@
           <label class="form-check-label" for="lines">
             Travel lines
           </label>
+	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i> 
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);" type="checkbox"
@@ -138,6 +142,8 @@
 	         <label class="form-check-label" for="lines">
 	           Native lands
 	         </label>
+		<i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
+                <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i> 
 	       </div>
 	        <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
@@ -145,6 +151,8 @@
           <label class="form-check-label" for="relief">
             Canadian relief
           </label>
+	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i> 
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox"
@@ -152,6 +160,8 @@
           <label class="form-check-label" for="surface_temp">
             Surface temperature
           </label>
+	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('surface_temp');"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('surface_temp');"></i> 
         </div>
       </div>
       <a class="list-group-item list-group-item-action bg-dark">
