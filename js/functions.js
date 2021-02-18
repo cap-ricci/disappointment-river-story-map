@@ -316,6 +316,117 @@ function setRadius() {
   radiusVal.innerHTML = radius;
 }
 
+
+function linesUp(storylines) {
+    var i;
+
+    var toMove = [];
+    for(const key in storylines){
+      elem = storylines[key];
+      toMove.push(elem.title);
+    }
+    //var layersToMove = [];
+    map.getLayers().forEach(function (layer) {
+        if (toMove.indexOf(layer.get('name')) >= 0) {
+            //layersToMove.push(layer);
+            i = layer.getZIndex();
+}
+})
+
+   var max = map.getLayers().getArray().length;
+   if (i < max) {
+       map.getLayers().forEach(function(this_omap) {
+           if (this_omap == 'relief' || this_omap == 'surface_temp') {
+               this_omap = layers[this_omap];
+           }
+           if (this_omap.getZIndex() == i+1) {
+                this_omap.setZIndex(i);
+       }
+})
+    map.getLayers().forEach(function (layer) {
+        if (toMove.indexOf(layer.get('name')) >= 0) {
+            //layersToMove.push(layer);
+            layer.setZIndex(i+1);
+    }
+    })
+   }
+}
+
+
+function oneUp(omap) {
+    if (omap == 'relief' || omap == 'surface_temp') {
+        omap = layers[omap];
+    }
+    var i = omap.getZIndex();
+
+    var max = map.getLayers().getArray().length;
+    if (i < max) {
+        map.getLayers().forEach(function(this_omap) {
+            if (this_omap == 'relief' || this_omap == 'surface_temp') {
+                this_omap = layers[this_omap];
+            }
+            if (this_omap.getZIndex() == i+1) {
+                 this_omap.setZIndex(i);
+        }
+})
+        omap.setZIndex(i+1);
+
+    }
+}
+
+function linesDown(omap) {
+    var i;
+
+    var toMove = [];
+    for(const key in storylines){
+      elem = storylines[key];
+      toMove.push(elem.title);
+    }
+    //var layersToMove = [];
+    map.getLayers().forEach(function (layer) {
+        if (toMove.indexOf(layer.get('name')) >= 0) {
+            //layersToMove.push(layer);
+            i = layer.getZIndex();
+}
+})
+
+
+   if (i > 2) {
+       map.getLayers().forEach(function(this_omap) {
+           if (this_omap == 'relief' || this_omap == 'surface_temp') {
+               this_omap = layers[this_omap];
+           }
+           if (this_omap.getZIndex() == i-1) {
+                this_omap.setZIndex(i);
+       }
+})
+    map.getLayers().forEach(function (layer) {
+        if (toMove.indexOf(layer.get('name')) >= 0) {
+            layer.setZIndex(i-1);
+    }
+    })
+   }
+}
+
+function oneDown(omap) {
+    if (omap == 'relief' || omap == 'surface_temp') {
+        omap = layers[omap];
+    }
+    var i = omap.getZIndex();
+    if (i > 2) {
+        map.getLayers().forEach(function(this_omap) {
+            if (this_omap == 'relief' || this_omap == 'surface_temp') {
+                this_omap = layers[this_omap];
+            }
+            if (this_omap.getZIndex() == i-1) {
+                 this_omap.setZIndex(i);
+        }
+    })
+        omap.setZIndex(i-1);
+    }
+}
+
+
 /// toggle checkbox for display of layers, add further if conditions for integration of more layers
 function toggleBtnClick(clicked, layer) {
   if (clicked) {
@@ -327,6 +438,7 @@ function toggleBtnClick(clicked, layer) {
     deleteOverlay(layer);
   } else {
     addOverlay(layer);
+    layers[layer].setZIndex(map.getLayers().getArray().length); 
     if (layer == 'surface_temp') {
     clicked_temp = true;
 } else if (layer == 'relief') {
@@ -376,13 +488,21 @@ function toggleBtnClickLines(clicked) {
         map.removeLayer(layersToRemove[i]);
     }
     } else {
+	var toName = []; 
         var lines = load_lines(storylines)
         for (const key in lines) {
-          if (Object.hasOwnProperty.call(lines, key)) {
+          //if (Object.hasOwnProperty.call(lines, key)) {
             const element = lines[key];
-            map.addLayer(element)
+            map.addLayer(element);
+	    toName.push(elem.title);
           }
-        }
+       // }
+	   
+        map.getLayers().forEach(function (layer) {
+            if (toName.indexOf(layer.get('name')) >= 0) {
+                layer.setZIndex(map.getLayers().getArray().length);
+    }
+}) 
         clicked_lines = true;
     }
 }
