@@ -55,6 +55,7 @@ function colorWithAlpha(color, alpha) {
 function show_natives_layer() {
     window.topLayer = nativesLand;
     map.addLayer(nativesLand);
+    nativesLand.setZIndex(map.getLayers().getArray().length); 
 
 }
 
