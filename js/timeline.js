@@ -190,7 +190,7 @@ tline.addButton({
 function start_timelines() {
   map.addInteraction(timelineselect);
   map.addLayer(timelinePoints);
-  window.topLayer = timelinePoints; 
+  timelinePoints.setZIndex(99);
   map.addControl(tline);
   map.addOverlay(timelinepopup);
 }

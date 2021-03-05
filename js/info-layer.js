@@ -43,13 +43,24 @@ var select = new ol.interaction.Select({
 
 function makePopupContent(feature) {
   var content = "";
+  content += "<b>" + feature.get("title") + "</b>";
+  content += "<p><p><p>";
   content += "<img src='"+feature.get("img")+"'/>";
+  content += "<i>Image: "
+  if (feature.get("img_captio")) {
+  content += feature.get("img_captio")+"</i>";
+} else {
+  content += feature.get("img_catio")+"</i>";
+}
+  content += "<p>";
   content += feature.get("text");
   content += "<p>";
   content += feature.get("url_text");
   if (feature.get("url") != "") {
   content += "<a href="+feature.get("url")+" title='Info'> here.</a>";
   }
+
+
   return content;
 }
 // On selected => show/hide popup
@@ -66,6 +77,7 @@ select.getFeatures().on(['remove'], function(e) {
      map.addOverlay(popup);
      window.topLayer = infoLayer;
      map.addLayer(infoLayer);
+     infoLayer.setZIndex(map.getLayers().getArray().length);
      map.addInteraction(select);
  }
 
