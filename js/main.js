@@ -41,6 +41,16 @@ var map = new ol.Map({
   }),
 layers: [ layers['watercolor']]
 });
+map.on("pointermove", function (evt) {
+  var hit = this.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+      return true;
+  }); 
+  if (hit) {
+      this.getTargetElement().style.cursor = 'pointer';
+  } else {
+      this.getTargetElement().style.cursor = '';
+  }
+});
 // // add control
 // // map.addControl(fs_ctrl);
 // map.addControl(overviewMapControl);

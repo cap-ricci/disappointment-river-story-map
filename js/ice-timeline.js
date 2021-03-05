@@ -29,7 +29,7 @@ var iceTline = new ol.control.Timeline({
     endDate: new Date('2022/12/31')
   }],
   graduation: 'year', // 'month'
-  minDate: new Date('1975/06/01'),
+  minDate: new Date('1979/06/01'),
   maxDate: new Date('2021/12/31'),
   getHTML: function (f) { return 'Arctic Ice Sheet'; },
   getFeatureDate: function (f) { return f.date; },
@@ -39,6 +39,7 @@ var iceTline = new ol.control.Timeline({
 // Set the date when ready
 setTimeout(function () { iceTline.setDate('1979'); });
 iceTline.addButton({
+  html: '<i class="fa fa-play"></i>',
   className: "go",
   title: "GO!",
   handleClick: function () {

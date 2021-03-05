@@ -169,7 +169,7 @@
       </a>
       <div id="controllers" class="sidebar-section-content">
           <div class="form-radio">
-            <input type="radio" name="myRadios"  value="none" id="none"/>
+            <input type="radio" name="myRadios"  value="none" id="none" checked/>
             <label class="form-check-label" for="none">
               None
             </label>
@@ -192,21 +192,14 @@
               Events-timeline
             </label> 
           </div>
-          <div class="form-radio">
-            <input type="radio" name="myRadios"  value="map-slider" id="map-slider"/>
-            <label class="form-check-label" for="map-slider">
-              Map-slider
-          </label>
-          </div>
       </div>
     </div>
     <div id="page-content-wrapper">
       <!----------------------------- Page Content -------------------------------->
       <!-- Map -->
-      <!-- FIXME map size to fill available content. check this post https://stackoverflow.com/questions/12887506/cannot-set-maps-div-height-for-openlayers-map -->
       <div class="container-push">
         <!-- Map div -->
-        <div id="map" style="width:100%; height:600px;"></div>
+        <div id="map" style="width:100%; height:92vh;"></div>
         <div id="story"></div>
         <div class="options"></div>
       </div>

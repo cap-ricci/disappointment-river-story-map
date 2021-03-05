@@ -24,21 +24,13 @@ var popup = new ol.Overlay.Popup (
  var infoLayer = new ol.layer.Vector({
    name: 'Additional information points',
    source: infoSource, 
-   style: new ol.style.Style({ image: new ol.style.Icon({ src:"info.png", scale: 0.03 }) })
+   style: new ol.style.Style({ image: new ol.style.Icon({ src:"infopoint.svg", scale: 1.5 }) })
  });
 
 // Control Select
 var select = new ol.interaction.Select({
      //condition: ol.events.condition.pointerMove,
-     style:  new ol.style.Style({
-      image: new ol.style.Circle({
-        radius: 7,
-        fill: new ol.style.Fill({color: 'orange'}),
-        stroke: new ol.style.Stroke({
-          color: [255,0,0], width: 1
-        })
-      })
-    })
+     style:  new ol.style.Style({ image: new ol.style.Icon({ src:"infopoint.svg", scale: 1.5 }) })
 });
 
 function makePopupContent(feature) {

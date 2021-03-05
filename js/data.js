@@ -21,7 +21,6 @@ var storylines = {
         'title': 'Peter Pond, Athabasca\'s early explorer',
         'storymap_img': '',
         'description': 'Discover life and exploration of Peter Pond, a controversial figure of the 18th century, who inspired Mackenzie to search the North West Passage.',
-        'lines_name': '',
         'points_name': 'pondLifePoints',
         "timeline_html": 'color: cornflowerblue',
         "img": '',

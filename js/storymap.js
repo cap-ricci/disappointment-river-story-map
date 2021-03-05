@@ -143,7 +143,8 @@ function noshow_storymap(){
 function load_lines(storylines) {
   var lines = []
   for (const key in storylines) {
-    if (Object.hasOwnProperty.call(storylines, key)) {
+    //load line shapefile only if present
+    if (Object.hasOwnProperty.call(storylines[key], "lines_name")) {
       const element = storylines[key];
       lines[key] = new ol.layer.Vector({
       name: element.title,

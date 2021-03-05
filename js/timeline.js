@@ -167,7 +167,7 @@ timelineselect.on('select', function(e){
 
 // add fast scroll buttons (+- 10 yrs)
 tline.addButton({
-  html: '<i class="fas fa-fast-forward"></i>',
+  html: '<i class="fa fa-fast-forward"></i>',
   handleClick: function(){
     var date = tline.getDate('center');
     date.setDate(date.getDate() + 365*10);
@@ -175,7 +175,7 @@ tline.addButton({
   }
 })
 tline.addButton({
-  html: '<i class="fas fa-fast-backward"></i>',
+  html: '<i class="fa fa-fast-backward"></i>',
   handleClick: function(){
     var date = tline.getDate('center');
     date.setDate(date.getDate() - 365*10);
