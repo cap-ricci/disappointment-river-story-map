@@ -25,15 +25,15 @@
   <script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
   <script
     src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
-    <!-- ol-ext -->
+  <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
+  <!-- ol-ext -->
   <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 
   <!-- custom styles -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/simple-sidebar.css">
-    <!-- removed samples.css because it interferes with storymap -->
+  <!-- removed samples.css because it interferes with storymap -->
   <!-- <link rel="stylesheet" href="css/samples.css" type="text/css" /> -->
   <!-- <link rel="stylesheet" href="prototype/styles/style.css" /> -->
   <!-- sidebar panel plugin -->
@@ -47,16 +47,23 @@
 <body>
   <script>
     // SET DEFAULT VALUES
-    var isBase = 'watercolor';  
+    var isBase = 'watercolor';
     var clicked_relief, clicked_temp, clicked_info, clicked_lines, clicked_natives = false;
   </script>
 
   <!-- ToC sidebar -->
   <div id="tocSidenav" class="sidenav">
-    <h3>Choose storyline:</h3>
+    <!-- <h3>Choose storyline:</h3> -->
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#" title="story" onclick="story_init('cook');">Cook's third journey - 1771-1773</a>
-    <a href="#" ; title="story" ; onclick="story_init('hearne');">Hearne's exploration of Coppermine River</a>
+    <a href="#" title="story" onclick="story_init('cook');">James Cook: third journey - 1771-1773</a>
+    <a href="#" ; title="story" ; onclick="story_init('hearne');">Samuel Hearne: exploration of Coppermine River</a>
+    <a href="#" ; title="story" ; onclick="story_init('pondLife');">Peter Pond: Athabasca's early explorer</a>
+    <a href="#" ; title="story" ; onclick="story_init('mackenzieLife');">Alexander Mackenzie: from the Highlands to the
+      NWT</a>
+    <a href="#" ; title="story" ; onclick="story_init('mackenzie');">Alexander Mackenzie: in search of the Northwest
+      Passage</a>
+    <a href="#" ; title="story" ; onclick="story_init('castner');">Brian Castner: Disappointment River</a>
+    <a href="#" ; title="story" ; onclick="story_init('mackay');">Mackay: ...</a>
   </div>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg static-top navbar-custom">
@@ -88,7 +95,7 @@
   <div class="d-flex" id="wrapper">
     <!-- controllers Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-      <a class="list-group-item list-group-item-action bg-dark" >
+      <a class="list-group-item list-group-item-action bg-dark">
         Base Map
       </a>
       <div id="basemaps" class="sidebar-section-content">
@@ -101,7 +108,7 @@
         </div>
         <div class="form-check">
           <input class="form-check-input" title="World Topo Map" ; onclick="setBasemap('aerial');" type="radio"
-            name="basemap" id="aerial" >
+            name="basemap" id="aerial">
           <label class="form-check-label" for="aerial">
             BING Aerial with labels
           </label>
@@ -119,79 +126,82 @@
       </a>
       <div id="layers" class=" sidebar-section-content">
         <div class="form-check">
-            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox"
-             name="layer" id="info_layer">
-           <label class="form-check-label" for="info_layer">
-             Information points
-           </label>
-           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
-           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
-         </div>
-         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox"
-            name="layer" id="lines_layer">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);"
+            type="checkbox" name="layer" id="info_layer">
+          <label class="form-check-label" for="info_layer">
+            Information points
+          </label>
+          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);"
+            type="checkbox" name="layer" id="lines_layer">
           <label class="form-check-label" for="lines">
             Travel lines
           </label>
-	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i> 
+          <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i>
         </div>
         <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);" type="checkbox"
-	           name="layer" id="nativesLand">
-	         <label class="form-check-label" for="lines">
-	           Native lands
-	         </label>
-		<i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
-                <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i> 
-	       </div>
-	        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox"
-            name="layer" id="relief">
+          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);"
+            type="checkbox" name="layer" id="nativesLand">
+          <label class="form-check-label" for="lines">
+            Native lands
+          </label>
+          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');"
+            type="checkbox" name="layer" id="relief">
           <label class="form-check-label" for="relief">
             Canadian relief
           </label>
-	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i> 
+          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox"
-            name="layer" id="surface_temp">
+        <!-- <div class="form-check">
+          <input class="form-check-input" title="Open Street Map"
+            onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox" name="layer" id="surface_temp">
           <label class="form-check-label" for="surface_temp">
             Surface temperature
           </label>
-	  <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('surface_temp');"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('surface_temp');"></i> 
-        </div>
+          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('surface_temp');"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('surface_temp');"></i>
+        </div> -->
       </div>
       <a class="list-group-item list-group-item-action bg-dark">
         Controllers
       </a>
       <div id="controllers" class="sidebar-section-content">
-          <div class="form-radio">
-            <input type="radio" name="myRadios"  value="none" id="none" checked/>
-            <label class="form-check-label" for="none">
-              None
-            </label>
-          </div>
-          <div class="form-radio">
-           <input type="radio" name="myRadios"  value="storymap" id="storymap"/>
-           <label class="form-check-label" for="storymap">
-              Storymap
-            </label>
-          </div>
-          <div class="form-radio">
-            <input type="radio" name="myRadios"  value="ice-timeline" id="ice-timeline"/>
-            <label class="form-check-label" for="ice-timeline">
-              Ice-timeline
-              </label> 
-          </div>
-          <div class="form-radio">
-            <input type="radio" name="myRadios"  value="events-timeline" id="events-timeline"/>
-            <label class="form-check-label" for="events-timeline">
-              Events-timeline
-            </label> 
-          </div>
+        <div class="form-radio">
+          <input type="radio" name="myRadios" value="none" id="none" checked />
+          <label class="form-check-label" for="none">
+            None
+          </label>
+        </div>
+        <div class="form-radio">
+          <input type="radio" name="myRadios" value="storymap" id="storymap" />
+          <label class="form-check-label" for="storymap">
+            Storymap
+          </label>
+        </div>
+        <div class="form-radio">
+          <input type="radio" name="myRadios" value="ice-timeline" id="ice-timeline" />
+          <label class="form-check-label" for="ice-timeline">
+            Ice-timeline
+          </label>
+        </div>
+        <div class="form-radio">
+          <input type="radio" name="myRadios" value="events-timeline" id="events-timeline" />
+          <label class="form-check-label" for="events-timeline">
+            Events-timeline
+          </label>
+        </div>
+      </div>
+      <div class="credits">
+        <p>Find credits and data sources in the <a href="about.html">About page</a></p>
       </div>
     </div>
     <div id="page-content-wrapper">
@@ -215,9 +225,9 @@
   <!-- Bootstrap, jQuery, plugins scripts -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
@@ -242,13 +252,13 @@
     var rad = $('.form-radio');
     var previous = null;
     for (var i = 0; i < rad.length; i++) {
-        rad[i].children[0].addEventListener('change', function() {
-            (previous) ? controlOff(previous.value): null;
-            if (this !== previous) {
-                previous = this;
-            }
-            controlOn(this.value)
-        });
+      rad[i].children[0].addEventListener('change', function () {
+        (previous) ? controlOff(previous.value) : null;
+        if (this !== previous) {
+          previous = this;
+        }
+        controlOn(this.value)
+      });
     }
   </script>
 </body>

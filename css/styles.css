@@ -34,6 +34,17 @@
   color: white;
 }
 
+.credits {
+  color: white;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
+.credits > p > a{
+  color: white!important;
+  text-decoration: underline;
+}
 .col-2 {
     padding-left: 0px !important;
 }
