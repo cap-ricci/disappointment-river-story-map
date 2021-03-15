@@ -1,3 +1,19 @@
+/* cover page style */
+.cover-text {
+  padding: 20px;
+  backdrop-filter: blur(50px);
+  border-radius: 10px;
+}
+
+.letsgo {
+  width: 80%;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+    text-align-last: center;
+    border-radius: 5px;
+    font-size: 20px;
+}
 /* navbar, footer, etc. */
 .navbar-custom {
     background-color:   #292d31;
@@ -173,6 +189,10 @@ cursor: pointer;
   font-style: italic;
 }
 
+/* timeline styling */
+.ol-feature {
+  padding: 0!important;
+}
 /* TODO not used? */
 /* Dropdown Button */
 .dropbtn {

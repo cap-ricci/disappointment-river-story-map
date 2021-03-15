@@ -22,7 +22,7 @@ function writeStory(json, data) {
               'name': title,
               'data-lon': lonlat[0],
               'data-lat': lonlat[1],
-              'data-zoom': "6",
+              'data-zoom': "8",
               'data-animation': "flyto"
           })
           chapter.append($('<h2>' + title + '</h2>' +
@@ -82,7 +82,7 @@ function story_init(name){
   'version=1.1.0' +
   '&request=GetFeature' +
   '&typename=explore:' + element.points_name +
-  '&outputFormat=application/json', {
+  '&outputFormat=application/json' , {
     method: 'POST',
     body: new XMLSerializer().serializeToString(featureRequest),
   })
@@ -91,10 +91,10 @@ function story_init(name){
     })
     .then(function (json) {
       var html = writeStory(json, element)
-      var chapters = writeChapters(json)
+      // var chapters = writeChapters(json)
       $('#story').empty();
       $('#story').append(html)
-      $(".options").empty();
+      // $(".options").empty();
       // write chapters is not working atm
       // $('.options').append(chapters)
       story_show();
@@ -139,7 +139,7 @@ function noshow_storymap(){
   $("#story").empty();
 }
 
-//TODO see where/when this function is best executed
+//travel lines are in an independent layer
 function load_lines(storylines) {
   var lines = []
   for (const key in storylines) {

@@ -285,9 +285,9 @@ function deleteOverlay(omap) {
 function info(omap) {
   var infoDiv = document.getElementById('infoDiv');
   infoDiv.innerHTML = "<p><span class = 'infobox'>" +
-  layers[omap].title + ": " + layers[omap].attribution + " Visit " + 
-  "<a href='" + layers[omap].sourceurl + 
-  "' target='_blank' rel='_noopener'>this page</a> for more information." 
+    layers[omap].title + ": " + layers[omap].attribution + " Visit " +
+    "<a href='" + layers[omap].sourceurl +
+    "' target='_blank' rel='_noopener'>this page</a> for more information."
   // Weather layer
   if (layers[omap].hascolorbar == 1) {
     //show weather layer legend
@@ -318,193 +318,193 @@ function setRadius() {
 
 
 function linesUp(storylines) {
-    var i;
+  var i;
 
-    var toMove = [];
-    for(const key in storylines){
-      elem = storylines[key];
-      toMove.push(elem.title);
+  var toMove = [];
+  for (const key in storylines) {
+    elem = storylines[key];
+    toMove.push(elem.title);
+  }
+  //var layersToMove = [];
+  map.getLayers().forEach(function (layer) {
+    if (toMove.indexOf(layer.get('name')) >= 0) {
+      //layersToMove.push(layer);
+      i = layer.getZIndex();
     }
-    //var layersToMove = [];
-    map.getLayers().forEach(function (layer) {
-        if (toMove.indexOf(layer.get('name')) >= 0) {
-            //layersToMove.push(layer);
-            i = layer.getZIndex();
-}
-})
+  })
 
-   var max = map.getLayers().getArray().length;
-   if (i < max) {
-       map.getLayers().forEach(function(this_omap) {
-           if (this_omap == 'relief' || this_omap == 'surface_temp') {
-               this_omap = layers[this_omap];
-           }
-           if (this_omap.getZIndex() == i+1) {
-                this_omap.setZIndex(i);
-       }
-})
-    map.getLayers().forEach(function (layer) {
-        if (toMove.indexOf(layer.get('name')) >= 0) {
-            //layersToMove.push(layer);
-            layer.setZIndex(i+1);
-    }
+  var max = map.getLayers().getArray().length;
+  if (i < max) {
+    map.getLayers().forEach(function (this_omap) {
+      if (this_omap == 'relief' || this_omap == 'surface_temp') {
+        this_omap = layers[this_omap];
+      }
+      if (this_omap.getZIndex() == i + 1) {
+        this_omap.setZIndex(i);
+      }
     })
-   }
+    map.getLayers().forEach(function (layer) {
+      if (toMove.indexOf(layer.get('name')) >= 0) {
+        //layersToMove.push(layer);
+        layer.setZIndex(i + 1);
+      }
+    })
+  }
 }
 
 
 function oneUp(omap) {
-    if (omap == 'relief' || omap == 'surface_temp') {
-        omap = layers[omap];
-    }
-    var i = omap.getZIndex();
+  if (omap == 'relief' || omap == 'surface_temp') {
+    omap = layers[omap];
+  }
+  var i = omap.getZIndex();
 
-    var max = map.getLayers().getArray().length;
-    if (i < max) {
-        map.getLayers().forEach(function(this_omap) {
-            if (this_omap == 'relief' || this_omap == 'surface_temp') {
-                this_omap = layers[this_omap];
-            }
-            if (this_omap.getZIndex() == i+1) {
-                 this_omap.setZIndex(i);
-        }
-})
-        omap.setZIndex(i+1);
+  var max = map.getLayers().getArray().length;
+  if (i < max) {
+    map.getLayers().forEach(function (this_omap) {
+      if (this_omap == 'relief' || this_omap == 'surface_temp') {
+        this_omap = layers[this_omap];
+      }
+      if (this_omap.getZIndex() == i + 1) {
+        this_omap.setZIndex(i);
+      }
+    })
+    omap.setZIndex(i + 1);
 
-    }
+  }
 }
 
 function linesDown(omap) {
-    var i;
+  var i;
 
-    var toMove = [];
-    for(const key in storylines){
-      elem = storylines[key];
-      toMove.push(elem.title);
+  var toMove = [];
+  for (const key in storylines) {
+    elem = storylines[key];
+    toMove.push(elem.title);
+  }
+  //var layersToMove = [];
+  map.getLayers().forEach(function (layer) {
+    if (toMove.indexOf(layer.get('name')) >= 0) {
+      //layersToMove.push(layer);
+      i = layer.getZIndex();
     }
-    //var layersToMove = [];
-    map.getLayers().forEach(function (layer) {
-        if (toMove.indexOf(layer.get('name')) >= 0) {
-            //layersToMove.push(layer);
-            i = layer.getZIndex();
-}
-})
+  })
 
 
-   if (i > 2) {
-       map.getLayers().forEach(function(this_omap) {
-           if (this_omap == 'relief' || this_omap == 'surface_temp') {
-               this_omap = layers[this_omap];
-           }
-           if (this_omap.getZIndex() == i-1) {
-                this_omap.setZIndex(i);
-       }
-})
-    map.getLayers().forEach(function (layer) {
-        if (toMove.indexOf(layer.get('name')) >= 0) {
-            layer.setZIndex(i-1);
-    }
+  if (i > 2) {
+    map.getLayers().forEach(function (this_omap) {
+      if (this_omap == 'relief' || this_omap == 'surface_temp') {
+        this_omap = layers[this_omap];
+      }
+      if (this_omap.getZIndex() == i - 1) {
+        this_omap.setZIndex(i);
+      }
     })
-   }
+    map.getLayers().forEach(function (layer) {
+      if (toMove.indexOf(layer.get('name')) >= 0) {
+        layer.setZIndex(i - 1);
+      }
+    })
+  }
 }
 
 function oneDown(omap) {
-    if (omap == 'relief' || omap == 'surface_temp') {
-        omap = layers[omap];
-    }
-    var i = omap.getZIndex();
-    if (i > 2) {
-        map.getLayers().forEach(function(this_omap) {
-            if (this_omap == 'relief' || this_omap == 'surface_temp') {
-                this_omap = layers[this_omap];
-            }
-            if (this_omap.getZIndex() == i-1) {
-                 this_omap.setZIndex(i);
-        }
+  if (omap == 'relief' || omap == 'surface_temp') {
+    omap = layers[omap];
+  }
+  var i = omap.getZIndex();
+  if (i > 2) {
+    map.getLayers().forEach(function (this_omap) {
+      if (this_omap == 'relief' || this_omap == 'surface_temp') {
+        this_omap = layers[this_omap];
+      }
+      if (this_omap.getZIndex() == i - 1) {
+        this_omap.setZIndex(i);
+      }
     })
-        omap.setZIndex(i-1);
-    }
+    omap.setZIndex(i - 1);
+  }
 }
 
 
 /// toggle checkbox for display of layers, add further if conditions for integration of more layers
 function toggleBtnClick(clicked, layer) {
   if (clicked) {
-      if (layer == 'surface_temp') {
+    if (layer == 'surface_temp') {
       clicked_temp = false;
-  } else if (layer == 'relief') {
+    } else if (layer == 'relief') {
       clicked_relief = false;
-  }
+    }
     deleteOverlay(layer);
   } else {
     addOverlay(layer);
-    layers[layer].setZIndex(map.getLayers().getArray().length); 
+    layers[layer].setZIndex(map.getLayers().getArray().length);
     if (layer == 'surface_temp') {
-    clicked_temp = true;
-} else if (layer == 'relief') {
-    clicked_relief = true;
-}
+      clicked_temp = true;
+    } else if (layer == 'relief') {
+      clicked_relief = true;
+    }
   }
 }
 
 function toggleBtnClickInfo(clicked) {
-    if (clicked) {
-        clicked_info = false;
-        hide_info_layer();
-    } else {
-        show_info_layer();
-        clicked_info = true;
-    }
+  if (clicked) {
+    clicked_info = false;
+    hide_info_layer();
+  } else {
+    show_info_layer();
+    clicked_info = true;
+  }
 }
 
-	function toggleBtnClickNative(clicked) {
-	    if (clicked) {
-	        clicked_natives = false;
-	        hide_natives_layer();
-	    } else {
-	        show_natives_layer();
-	        clicked_natives = true;
-	    }
-	}
-	
+function toggleBtnClickNative(clicked) {
+  if (clicked) {
+    clicked_natives = false;
+    hide_natives_layer();
+  } else {
+    show_natives_layer();
+    clicked_natives = true;
+  }
+}
+
 
 
 function toggleBtnClickLines(clicked) {
-    if (clicked) {
-        clicked_lines = false;
-        var toDelete = [];
-        for(const key in storylines){
-          elem = storylines[key];
-          toDelete.push(elem.title);
-        }
-        var layersToRemove = [];
-        map.getLayers().forEach(function (layer) {
-            if (toDelete.indexOf(layer.get('name')) >= 0) {
-                layersToRemove.push(layer);
+  if (clicked) {
+    clicked_lines = false;
+    var toDelete = [];
+    for (const key in storylines) {
+      elem = storylines[key];
+      toDelete.push(elem.title);
     }
-})
+    var layersToRemove = [];
+    map.getLayers().forEach(function (layer) {
+      if (toDelete.indexOf(layer.get('name')) >= 0) {
+        layersToRemove.push(layer);
+      }
+    })
     var len = layersToRemove.length;
-    for(var i = 0; i < len; i++) {
-        map.removeLayer(layersToRemove[i]);
+    for (var i = 0; i < len; i++) {
+      map.removeLayer(layersToRemove[i]);
     }
-    } else {
-	var toName = []; 
-        var lines = load_lines(storylines)
-        for (const key in lines) {
-          //if (Object.hasOwnProperty.call(lines, key)) {
-            const element = lines[key];
-            map.addLayer(element);
-	    toName.push(elem.title);
-          }
-       // }
-	   
-        map.getLayers().forEach(function (layer) {
-            if (toName.indexOf(layer.get('name')) >= 0) {
-                layer.setZIndex(map.getLayers().getArray().length);
+  } else {
+    var toName = [];
+    var lines = load_lines(storylines)
+    for (const key in lines) {
+      //if (Object.hasOwnProperty.call(lines, key)) {
+      const element = lines[key];
+      map.addLayer(element);
+      toName.push(elem.title);
     }
-}) 
-        clicked_lines = true;
-    }
+    // }
+
+    map.getLayers().forEach(function (layer) {
+      if (toName.indexOf(layer.get('name')) >= 0) {
+        layer.setZIndex(map.getLayers().getArray().length);
+      }
+    })
+    clicked_lines = true;
+  }
 }
 
 
@@ -518,7 +518,7 @@ function closeNav() {
 
 // alternative using radio buttons
 function controlOn(controlName) {
-  switch(controlName) {
+  switch (controlName) {
     case 'ice-timeline':
       show_arctic_map();
       break;
@@ -529,36 +529,30 @@ function controlOn(controlName) {
       //ask user which storymap -> open hidden side panel
       //potential hole bcs use might not choose a storymap
       openNav();
-    break;
-    case 'map-slider':
-      //TODO implement show_map_slider()
-      show_map_slider();
+      $('#story_change').show();
       break;
     default:
-      //do nothing
+    //do nothing
   }
-} 
+}
 
 
 function controlOff(controlName) {
-  switch(controlName) {
+  switch (controlName) {
     case 'ice-timeline':
       noshow_arctic_map();
       break;
     case 'events-timeline':
-      //TODO implement
+
       stop_timelines();
       break;
     case 'storymap':
-      //TODO implement
+
+      $('#story_change').hide();
       noshow_storymap()
-    break;
-    case 'map-slider':
-      //TODO implement noshow_map_slider()
-      noshow_map_slider();
       break;
     default:
-      //do nothing
+    //do nothing
   }
-} 
+}
 

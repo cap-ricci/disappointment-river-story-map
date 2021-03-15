@@ -34,21 +34,7 @@ if (timelinePointsSource.getState() == 'ready') {
 
 // change point colour depending on voyage 
 timelinePoints.setStyle(function(feature) {
-  let fillColor;
-  var voyage = feature.get("voyage");
-  if (voyage == 'cook') {
-    fillColor = 'lightcoral';
-} else if (voyage == 'hearne') {
-    fillColor = 'turquoise';
-} else if (voyage == 'pond') {
-    fillColor = 'cornflowerblue';
-} else if (voyage == 'castner') {
-    fillColor = 'orchid';
-} else if (voyage == 'mackenzieLife') {
-    fillColor = 'chocolate';
-} else {
-    fillColor = 'black';
-}
+  let fillColor = storylines[feature.get('voyage')].color;
 
   return new ol.style.Style({
    image: new ol.style.Circle({
@@ -70,11 +56,10 @@ var tline = new ol.control.Timeline({
   source: timelinePointsSource,
   graduation: 'month',
   zoomButton: true,
-  // TODO improve feature display in timeline
   getHTML: function(f){
     //return '<img src="'+f.get('img')+'"/> '+(f.get('geo_name')||'');
-    return  '<div style="'+
-        storylines[f.getId().split("Points.")[0]].timeline_html+
+    return  '<div style="color: white; background-color:'+
+        storylines[f.get('voyage')].color+
         '">'+f.get('geo_name')+'</div>';
   },
   getFeatureDate: function(f) {
@@ -85,7 +70,7 @@ var tline = new ol.control.Timeline({
     // Create end date
     if (!d) {
       d = new Date (f.get('date')); 
-      d = new Date( d.getTime() + (5 + 10*10*24*60*60*1000));
+      d = new Date( d.getTime() + (5 + 100*10*24*60*60*1000));
       f.set('endDate', d);
     }
     return d;
@@ -165,12 +150,12 @@ timelineselect.on('select', function(e){
   }
 });
 
-// add fast scroll buttons (+- 10 yrs)
+// add fast scroll buttons (+- 50 yrs)
 tline.addButton({
   html: '<i class="fa fa-fast-forward"></i>',
   handleClick: function(){
     var date = tline.getDate('center');
-    date.setDate(date.getDate() + 365*10);
+    date.setDate(date.getDate() + 365*50);
     tline.setDate(date);
   }
 })
@@ -178,7 +163,7 @@ tline.addButton({
   html: '<i class="fa fa-fast-backward"></i>',
   handleClick: function(){
     var date = tline.getDate('center');
-    date.setDate(date.getDate() - 365*10);
+    date.setDate(date.getDate() - 365*50);
     tline.setDate(date);
   }
 })
@@ -193,6 +178,8 @@ function start_timelines() {
   timelinePoints.setZIndex(99);
   map.addControl(tline);
   map.addOverlay(timelinepopup);
+  //TODO set timeline date around 1779s
+  // tline.setDate("1779-01-01");
 }
 
 function stop_timelines(){

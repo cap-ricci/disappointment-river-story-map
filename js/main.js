@@ -35,9 +35,10 @@ var map = new ol.Map({
   view: new ol.View({
     projection: "EPSG:3857",
     zoom: 3,
-    maxZoom: 6,
+    maxZoom: 10,
     minZoom:2,
-    center: [150000000, 7000000]
+    center: [-11000000, 7000000]
+    // center: [150000000, 7000000]
   }),
 layers: [ layers['watercolor']]
 });
@@ -51,37 +52,5 @@ map.on("pointermove", function (evt) {
       this.getTargetElement().style.cursor = '';
   }
 });
-// // add control
-// // map.addControl(fs_ctrl);
-// map.addControl(overviewMapControl);
-// // map.addControl(mousePositionControl);
-// map.addControl(scale);
-// // add Interaction
-// map.addInteraction(drz);
-
-// voyage line vector layers.. added at the beginning
-//TODO probably need to be changed later
-/*
-var lines = load_lines(storylines)
-for (const key in lines) {
-  if (Object.hasOwnProperty.call(lines, key)) {
-    const element = lines[key];
-    map.addLayer(element)
-  }
-}
-*/
-
-//TESTTESTTEST loads geojson from native land. how to encapsulate in a vector layer?
-fetch('https://native-land.ca/api/index.php?maps=territories')
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function(json) {
-    var geoJSON = {
-  "type": "FeatureCollection",
-  "features": json
- }
-//  console.log(geoJSON) success
-  })
 
  
