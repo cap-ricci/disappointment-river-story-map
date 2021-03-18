@@ -124,7 +124,9 @@ tline.on('scroll', function(e){
 // choose feature by clicking on it on the map
 
 var timelineselect = new ol.interaction.Select({
-    //condition: ol.events.condition.click,
+    layers: function(layer) {
+	  return layer.get('selectable') == true;
+	  },
     hitTolerance: 5,
     style: new ol.style.Style({
           image: new ol.style.Circle({
@@ -136,6 +138,8 @@ var timelineselect = new ol.interaction.Select({
           })
         })
 });//, style: style(true)
+
+timelinePoints.set('selectable', true);
 
 timelineselect.on('select', function(e){
   var f = e.selected[0];
