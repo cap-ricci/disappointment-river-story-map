@@ -30,9 +30,13 @@ var infoLayer = new ol.layer.Vector({
 
 // Control Select
 var select = new ol.interaction.Select({
-  //  condition: ol.events.condition.pointerMove,
+   layers: function(layer) {
+      return layer.get('selectable') == true;
+    },
   style: new ol.style.Style({ image: new ol.style.Icon({ src: "img/infopoint_selected.svg", scale: 1.5 }) })
 });
+
+infoLayer.set('selectable', true);
 //TODO load elements only if present
 // extend popups to show information on the travel lines as well
 function makePopupContent(feature) {
