@@ -23,6 +23,8 @@ function colorWithAlpha(color, alpha) {
       source: nativesSource
     });
 
+    nativesLand.set('selectable', false);
+
     nativesLand.setStyle(function(feature) {
       var hexColor = feature.get('color');
       var polyColour = colorWithAlpha(hexColor, 0.2);
