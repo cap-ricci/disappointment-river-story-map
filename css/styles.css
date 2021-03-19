@@ -64,6 +64,10 @@
 .col-2 {
     padding-left: 0px !important;
 }
+/* this is needed to make the popovers visible */
+.fade {
+  opacity: 1!important;
+}
 
 /* timeline styling */
 #timelines > ul {
@@ -172,7 +176,13 @@
   left: auto;
   right: .5em;
 }
-
+/* fix unselectable last storymap item */
+.ol-storymap {
+  margin-bottom: 100px;
+}
+#story {
+  margin-bottom: 100px;
+}
 #story img {
 display: block;
 margin: auto;
@@ -238,3 +248,8 @@ cursor: pointer;
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;} 
+
+/* make modal background transparent */
+.modal-backdrop {
+  background-color: rgba(0,0,0,.0001) !important;
+}

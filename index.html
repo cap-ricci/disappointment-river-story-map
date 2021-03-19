@@ -74,6 +74,9 @@
     <div class="container-fluid">
       <a style="position: absolute; left: 0" href="cover.html"><img src="img/mackenzie.jpg"></a>
       <h2 style="color: white; padding-left: 250px">Disappointment River</h2>
+      <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle fa-2x"
+              aria-hidden="true" style="color: white; padding-left: 8px;"></i></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -135,6 +138,10 @@
           </label>
           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
+
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);"
@@ -144,6 +151,9 @@
           </label>
           <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
           <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);"
@@ -153,6 +163,9 @@
           </label>
           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
         </div>
         <div class="form-check">
           <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');"
@@ -162,6 +175,9 @@
           </label>
           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
         </div>
         <!-- <div class="form-check">
           <input class="form-check-input" title="Open Street Map"
@@ -182,12 +198,18 @@
           <label class="form-check-label" for="none">
             None
           </label>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
         </div>
         <div class="form-radio">
           <input type="radio" name="myRadios" value="storymap" id="storymap" />
           <label class="form-check-label" for="storymap">
             Storymap
           </label>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
           <button id="story_change" onclick="openNav()">Change story</button>
         </div>
         <div class="form-radio">
@@ -195,12 +217,18 @@
           <label class="form-check-label" for="ice-timeline">
             Ice-timeline
           </label>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+              aria-hidden="true" style="color: black"></i></a>
         </div>
         <div class="form-radio">
           <input type="radio" name="myRadios" value="events-timeline" id="events-timeline" />
           <label class="form-check-label" for="events-timeline">
             Events-timeline
           </label>
+          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
+          data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
+            aria-hidden="true" style="color: black"></i></a>
         </div>
       </div>
       <div class="credits">
@@ -215,6 +243,40 @@
         <div id="map" style="width:100%; height:92vh;"></div>
         <div id="story"></div>
         <div class="options"></div>
+          <!-- modal that appears on page load -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">Get started</h4>
+        </div>
+        <div class="modal-body">
+          <p>Hello there! Ready to discover the 18th century arctic exploration?
+            Your control center is located on the left. You can choose between two paths, <b>Storymaps</b> and <b>Timeline</b>:
+            <ul>
+              <li><b>Storymaps</b> let you follow one storyline at a time, let it be an exploration expedition or life facts about the explorers. <u>We reccomend you start here.</u></li>
+              <li><b>Timeline</b> gives a more comprehensive approach, showing all storymaps at once. This way we think that you can better appreaciate the spatiotemporal distribution of the events</li>
+            </ul>
+            But that's not the end of the story! You can also
+            <ul>
+              <li><b>Choose different base maps</b></li>
+              <li><b>Add or remove data layers</b>, great to learn more about the surroundings! <br/><b>Hint:</b> All the elements appearing on the map are clickable!</li>
+            
+            </ul>
+            And the cherry on the cake: the <b>Ice timeline</b>! Ready for a completely different persective?
+            Use the <i class="fa fa-question-circle"
+                aria-hidden="true" style="color: black"></i> icon to get information about each controller. You can always come back here by clicking the big ? in the top navbar. Enjoy!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
       </div>
     </div>
   </div>
@@ -228,9 +290,9 @@
   <!-- Bootstrap, jQuery, plugins scripts -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script> -->
+    crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
@@ -268,6 +330,14 @@
     toggleBtnClickLines(clicked_lines);
     //hide the change story button
     $('#story_change').hide();
+    // enable popovers
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    // enable modal
+    setTimeout(function() {
+    $('#myModal').modal();
+}, 1000);
   </script>
 </body>
 

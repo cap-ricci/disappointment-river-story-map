@@ -38,9 +38,10 @@ function writeStory(json, data) {
           }
           //add back to top button to last element
           if(idx === features.length-1) {
-            // FIXME back to top button not working
+            // 
             // chapter.append($('<div class="ol-scroll-top"><span>Top</span></div>'));
-            chapter.append($('<div class="ol-scroll-next"><span>Next</span></div>'));
+            // chapter.append($('<div class="ol-scroll-next"><span>Next</span></div>'));
+            
           }
           //add next button to inner elements
           else {
