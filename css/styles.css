@@ -253,3 +253,13 @@ cursor: pointer;
 .modal-backdrop {
   background-color: rgba(0,0,0,.0001) !important;
 }
+
+.popover {
+z-index: 999!important;
+width: 200px;
+}
+
+.popover-content{
+font-size: 1rem;
+padding: 10px;
+}
