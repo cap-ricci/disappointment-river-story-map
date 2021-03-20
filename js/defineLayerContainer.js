@@ -25,6 +25,13 @@ function defineLayerContainer() {
     })
   });
 
+  //Define OSM Standard
+  layers['OSMStandard'] = new ol.layer.Tile({
+    source: new ol.source.OSM(),    
+    visible: true,
+    title: 'OSMStandard'        
+  })
+
   // Define bingLayer
   layers['aerial'] = new ol.layer.Tile({
     source: new ol.source.BingMaps({
