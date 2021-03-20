@@ -2,191 +2,172 @@
 <!-- 14.09.20 -->
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="something" />
+        <meta name="author" content="" />
 
-<head>
+        <!-- TODO change application name  -->
+        <title>Disappointment river - story map</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="something">
-  <meta name="author" content="">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
 
-  <!-- TODO change application name  -->
-  <title>Disappointment river - story map</title>
+        <!-- Openlayers -->
+        <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+        <script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+        <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
+        <!-- ol-ext -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" type="text/css"
-    media="all" />
+        <!-- custom styles -->
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/simple-sidebar.css" />
+        <!-- removed samples.css because it interferes with storymap -->
+        <!-- <link rel="stylesheet" href="css/samples.css" type="text/css" /> -->
+        <!-- <link rel="stylesheet" href="prototype/styles/style.css" /> -->
+        <!-- sidebar panel plugin -->
+        <link rel="stylesheet" href="css/BootSideMenu.css" />
 
-  <!-- Openlayers -->
-  <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
-  <script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
-  <script
-    src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
-  <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
-  <!-- ol-ext -->
-  <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+        <!-- ol-ext -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+    </head>
 
-  <!-- custom styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/simple-sidebar.css">
-  <!-- removed samples.css because it interferes with storymap -->
-  <!-- <link rel="stylesheet" href="css/samples.css" type="text/css" /> -->
-  <!-- <link rel="stylesheet" href="prototype/styles/style.css" /> -->
-  <!-- sidebar panel plugin -->
-  <link rel="stylesheet" href="css/BootSideMenu.css">
+    <body>
+        <script>
+            // SET DEFAULT VALUES
+            var isBase = "watercolor";
+            var clicked_relief,
+                clicked_temp,
+                clicked_info,
+                clicked_lines,
+                clicked_natives = false;
+        </script>
 
-  <!-- ol-ext -->
-  <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
-
-</head>
-
-<body>
-  <script>
-    // SET DEFAULT VALUES
-    var isBase = 'watercolor';
-    var clicked_relief, clicked_temp, clicked_info, clicked_lines, clicked_natives = false;
-  </script>
-
-  <!-- ToC sidebar -->
-  <div id="tocSidenav" class="sidenav">
-    <!-- <h3>Choose storyline:</h3> -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a style="border-left: 3px solid #ff550c" href="#" title="story" onclick="story_init('cook');">James Cook: third
-      journey - 1771-1773</a>
-    <a style="border-left: 3px solid #a984ff" href="#" title="story" onclick="story_init('hearne');">Samuel Hearne:
-      exploration of Coppermine River</a>
-    <a href="#" title="story" style="border-left: 3px solid #fff" onclick="story_init('pondLife');">Peter Pond: Athabasca's early explorer</a>
-    <a href="#"  style="border-left: 3px solid rgb(29, 178, 223)"  title="story" onclick="story_init('mackenzieLife');">Alexander Mackenzie: from the Highlands to the
-      NWT</a>
-    <a style="border-left: 3px solid #ff3328" href="#" title="story" onclick="story_init('mackenzie');">Alexander
-      Mackenzie: in search of the Northwest
-      Passage</a>
-    <a style="border-left: 3px solid #0b872a" href="#" title="story" onclick="story_init('castner');">Brian Castner:
-      Disappointment River</a>
-    <a href="#" title="story"  style="border-left: 3px solid rgb(197, 14, 136)"  onclick="story_init('mackay');">Mackay: Story</a>
-  </div>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg static-top navbar-custom">
-    <div class="container-fluid">
-      <a style="position: absolute; left: 0" href="cover.html"><img src="img/mackenzie.jpg"></a>
-      <h2 style="color: white; padding-left: 250px">Disappointment River</h2>
-      <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle fa-2x"
-              aria-hidden="true" style="color: white; padding-left: 8px;"></i></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">App
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="howitworks.html">How it works</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="d-flex" id="wrapper">
-    <!-- controllers Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-      <a class="list-group-item list-group-item-action bg-dark">
-        Base Map
-      </a>
-      <div id="basemaps" class="sidebar-section-content">
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="setBasemap('watercolor');" type="radio"
-            name="basemap" id="watercolor" checked>
-          <label class="form-check-label" for="watercolor">
-            Stamen Watercolor
-          </label>
+        <!-- ToC sidebar -->
+        <div id="tocSidenav" class="sidenav">
+            <!-- <h3>Choose storyline:</h3> -->
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a style="border-left: 3px solid #ff550c;" href="#" title="story" onclick="story_init('cook');">James Cook: thir journey - 1771-1773</a>
+            <a style="border-left: 3px solid #a984ff;" href="#" title="story" onclick="story_init('hearne');">Samuel Hearne: Exploration of Coppermine River</a>
+            <a href="#" title="story" style="border-left: 3px solid #fff;" onclick="story_init('pondLife');">Peter Pond: Athabasca's early explorer</a>
+            <a href="#" style="border-left: 3px solid rgb(29, 178, 223);" title="story" onclick="story_init('mackenzieLife');">Alexander Mackenzie: from the Highlands to the NWT</a>
+            <a style="border-left: 3px solid #ff3328;" href="#" title="story" onclick="story_init('mackenzie');">Alexander Mackenzie: in search of the Northwest Passage</a>
+            <a style="border-left: 3px solid #0b872a;" href="#" title="story" onclick="story_init('castner');">Brian Castner: Disappointment River</a>
+            <a href="#" title="story" style="border-left: 3px solid rgb(197, 14, 136);" onclick="story_init('mackay');">Mackay: Story</a>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" title="World Topo Map" onclick="setBasemap('aerial');" type="radio"
-            name="basemap" id="aerial">
-          <label class="form-check-label" for="aerial">
-            BING Aerial with labels
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Stamen Toner" onclick="setBasemap('terrain');" type="radio"
-            name="basemap" id="toner">
-          <label class="form-check-label" for="toner">
-            Stamen Terrain
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="setBasemap('OSMStandard');" type="radio"
-            name="basemap" id="OSMStandard">
-          <label class="form-check-label" for="OSMStandard">
-            OSM Standard
-          </label>
-        </div>
-      </div>
-      <a class="list-group-item list-group-item-action bg-dark">
-        Layers
-      </a>
-      <div id="layers" class=" sidebar-section-content">
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);"
-            type="checkbox" name="layer" id="info_layer" checked>
-          <label class="form-check-label" for="info_layer">
-            Information points
-          </label>
-          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);"
-            type="checkbox" name="layer" id="lines_layer" checked>
-          <label class="form-check-label" for="lines">
-            Travel lines
-          </label>
-          <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);"
-            type="checkbox" name="layer" id="nativesLand">
-          <label class="form-check-label" for="lines">
-            Native lands
-          </label>
-          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');"
-            type="checkbox" name="layer" id="relief">
-          <label class="form-check-label" for="relief">
-            Canadian relief
-          </label>
-          <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-        </div>
-        <!-- <div class="form-check">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg static-top navbar-custom">
+            <div class="container-fluid">
+                <a style="position: absolute; left: 0;" href="cover.html"><img src="img/mackenzie.jpg" /></a>
+                <h2 style="color: white; padding-left: 250px;">Disappointment River</h2>
+                <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                    <i class="fa fa-question-circle fa-2x" aria-hidden="true" style="color: white; padding-left: 8px;"></i>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">App </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="howitworks.html">How it works</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex" id="wrapper">
+            <!-- controllers Sidebar -->
+            <div class="bg-dark border-right" id="sidebar-wrapper">
+                <a class="list-group-item list-group-item-action bg-dark">
+                    Base Map
+                </a>
+                <div id="basemaps" class="sidebar-section-content">
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" onclick="setBasemap('watercolor');" type="radio" name="basemap" id="watercolor" checked />
+                        <label class="form-check-label" for="watercolor">
+                            Stamen Watercolor
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="World Topo Map" onclick="setBasemap('aerial');" type="radio" name="basemap" id="aerial" />
+                        <label class="form-check-label" for="aerial">
+                            BING Aerial with labels
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="Stamen Toner" onclick="setBasemap('terrain');" type="radio" name="basemap" id="toner" />
+                        <label class="form-check-label" for="toner">
+                            Stamen Terrain
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" onclick="setBasemap('OSMStandard');" type="radio" name="basemap" id="OSMStandard" />
+                        <label class="form-check-label" for="OSMStandard">
+                            OSM Standard
+                        </label>
+                    </div>
+                </div>
+                <a class="list-group-item list-group-item-action bg-dark">
+                    Layers
+                </a>
+                <div id="layers" class="sidebar-section-content">
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox" name="layer" id="info_layer" checked />
+                        <label class="form-check-label" for="info_layer">
+                            Information points
+                        </label>
+                        <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox" name="layer" id="lines_layer" checked />
+                        <label class="form-check-label" for="lines">
+                            Travel lines
+                        </label>
+                        <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);" type="checkbox" name="layer" id="nativesLand" />
+                        <label class="form-check-label" for="lines">
+                            Native lands
+                        </label>
+                        <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox" name="layer" id="relief" />
+                        <label class="form-check-label" for="relief">
+                            Canadian relief
+                        </label>
+                        <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <!-- <div class="form-check">
           <input class="form-check-input" title="Open Street Map"
             onclick="toggleBtnClick(clicked_temp, 'surface_temp');" type="checkbox" name="layer" id="surface_temp">
           <label class="form-check-label" for="surface_temp">
@@ -195,157 +176,150 @@
           <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('surface_temp');"></i>
           <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('surface_temp');"></i>
         </div> -->
-      </div>
-      <a class="list-group-item list-group-item-action bg-dark">
-        Controllers
-      </a>
-      <div id="controllers" class="sidebar-section-content">
-        <div class="form-radio">
-          <input type="radio" name="myRadios" value="none" id="none" checked />
-          <label class="form-check-label" for="none">
-            None
-          </label>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-        </div>
-        <div class="form-radio">
-          <input type="radio" name="myRadios" value="storymap" id="storymap" />
-          <label class="form-check-label" for="storymap">
-            Storymap
-          </label>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-          <button id="story_change" onclick="openNav()">Change story</button>
-        </div>
-        <div class="form-radio">
-          <input type="radio" name="myRadios" value="ice-timeline" id="ice-timeline" />
-          <label class="form-check-label" for="ice-timeline">
-            Ice-timeline
-          </label>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-            data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-              aria-hidden="true" style="color: black"></i></a>
-        </div>
-        <div class="form-radio">
-          <input type="radio" name="myRadios" value="events-timeline" id="events-timeline" />
-          <label class="form-check-label" for="events-timeline">
-            Events-timeline
-          </label>
-          <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus"
-          data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question-circle"
-            aria-hidden="true" style="color: black"></i></a>
-        </div>
-      </div>
-      <div class="credits">
-        <p>Find credits and data sources in the <a href="about.html">About page</a></p>
-      </div>
-    </div>
-    <div id="page-content-wrapper">
-      <!----------------------------- Page Content -------------------------------->
-      <!-- Map -->
-      <div class="container-push">
-        <!-- Map div -->
-        <div id="map" style="width:100%; height:92vh;"></div>
-        <div id="story"></div>
-        <div class="options"></div>
-          <!-- modal that appears on page load -->
-  <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-          <h4 class="modal-title">Get started</h4>
-        </div>
-        <div class="modal-body">
-          <p>Hello there! Ready to discover the 18th century arctic exploration?
-            Your control center is located on the left. You can choose between two paths, <b>Storymaps</b> and <b>Timeline</b>:
-            <ul>
-              <li><b>Storymaps</b> let you follow one storyline at a time, let it be an exploration expedition or life facts about the explorers. <u>We reccomend you start here.</u></li>
-              <li><b>Timeline</b> gives a more comprehensive approach, showing all storymaps at once. This way we think that you can better appreaciate the spatiotemporal distribution of the events</li>
-            </ul>
-            But that's not the end of the story! You can also
-            <ul>
-              <li><b>Choose different base maps</b></li>
-              <li><b>Add or remove data layers</b>, great to learn more about the surroundings! <br/><b>Hint:</b> All the elements appearing on the map are clickable!</li>
-            
-            </ul>
-            And the cherry on the cake: the <b>Ice timeline</b>! Ready for a completely different persective?
-            Use the <i class="fa fa-question-circle"
-                aria-hidden="true" style="color: black"></i> icon to get information about each controller. You can always come back here by clicking the big ? in the top navbar. Enjoy!
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-  
-    </div>
-  </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="page-footer font-small footer-custom">
-    <div class=" text-center py-3">
-      Kartographisches Projektstudium II
-    </div>
-  </footer>
-  <!-- end Footer -->
-  <!-- Bootstrap, jQuery, plugins scripts -->
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- ol-ext -->
-  <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
-  <!-- KPS scripts -->
-  <script src="js/defineLayerContainer.js"></script>
-  <script src="js/functions.js"></script>
-  <!-- controllers -->
-  <script type="text/javascript" src="js/storymap.js"></script>
-  <script type="text/javascript" src="js/data.js"></script>
-  <script src="js/main.js"></script>
-  <script type="text/javascript" src="js/timeline.js"></script>
-  <script type="text/javascript" src="js/ice-timeline.js"></script>
-  <script type="text/javascript" src="js/mapSlider.js"></script>
-  <script type="text/javascript" src="js/info-layer.js"></script>
-  <script type="text/javascript" src="js/natives-land.js"></script>
-  <script>
-    // TODO move in main
-    var rad = $('.form-radio');
-    var previous = null;
-    for (var i = 0; i < rad.length; i++) {
-      rad[i].children[0].addEventListener('change', function () {
-        (previous) ? controlOff(previous.value) : null;
-        if (this !== previous) {
-          previous = this;
-        }
-        controlOn(this.value)
-      });
-    }
-    //add information points travel lines on startup
-    toggleBtnClickInfo(clicked_info);
-    toggleBtnClickLines(clicked_lines);
-    //hide the change story button
-    $('#story_change').hide();
-    // enable popovers
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
-    // enable modal
-    setTimeout(function() {
-    $('#myModal').modal();
-}, 1000);
-  </script>
-</body>
+                </div>
+                <a class="list-group-item list-group-item-action bg-dark">
+                    Controllers
+                </a>
+                <div id="controllers" class="sidebar-section-content">
+                    <div class="form-radio">
+                        <input type="radio" name="myRadios" value="none" id="none" checked />
+                        <label class="form-check-label" for="none">
+                            None
+                        </label>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <div class="form-radio">
+                        <input type="radio" name="myRadios" value="storymap" id="storymap" />
+                        <label class="form-check-label" for="storymap">
+                            Storymap
+                        </label>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                        <button id="story_change" onclick="openNav()">Change story</button>
+                    </div>
+                    <div class="form-radio">
+                        <input type="radio" name="myRadios" value="ice-timeline" id="ice-timeline" />
+                        <label class="form-check-label" for="ice-timeline">
+                            Ice-timeline
+                        </label>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                    <div class="form-radio">
+                        <input type="radio" name="myRadios" value="events-timeline" id="events-timeline" />
+                        <label class="form-check-label" for="events-timeline">
+                            Events-timeline
+                        </label>
+                        <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="credits">
+                    <p>Find credits and data sources in the <a href="about.html">About page</a></p>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <!----------------------------- Page Content -------------------------------->
+                <!-- Map -->
+                <div class="container-push">
+                    <!-- Map div -->
+                    <div id="map" style="width: 100%; height: 92vh;"></div>
+                    <div id="story"></div>
+                    <div class="options"></div>
+                    <!-- modal that appears on page load -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                    <h4 class="modal-title">Get started</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Hello there! Ready to discover the 18th century arctic exploration? Your control center is located on the left. You can choose between two paths, <b>Storymaps</b> and <b>Timeline</b>:</p>
 
+                                    <ul>
+                                        <li><b>Storymaps</b> let you follow one storyline at a time, let it be an exploration expedition or life facts about the explorers. <u>We reccomend you start here.</u></li>
+                                        <li><b>Timeline</b> gives a more comprehensive approach, showing all storymaps at once. This way we think that you can better appreaciate the spatiotemporal distribution of the events</li>
+                                    </ul>
+                                    But that's not the end of the story! You can also
+                                    <ul>
+                                        <li><b>Choose different base maps</b></li>
+                                        <li>
+                                            <b>Add or remove data layers</b>, great to learn more about the surroundings! <br />
+                                            <b>Hint:</b> All the elements appearing on the map are clickable!
+                                        </li>
+                                    </ul>
+                                    And the cherry on the cake: the <b>Ice timeline</b>! Ready for a completely different persective? Use the
+                                    <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"> icon to get information about each controller. You can always come back here by clicking the big ? in the top navbar. Enjoy! </i>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="page-footer font-small footer-custom">
+            <div class="text-center py-3">
+                Kartographisches Projektstudium II
+            </div>
+        </footer>
+        <!-- end Footer -->
+        <!-- Bootstrap, jQuery, plugins scripts -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- ol-ext -->
+        <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
+        <!-- KPS scripts -->
+        <script src="js/defineLayerContainer.js"></script>
+        <script src="js/functions.js"></script>
+        <!-- controllers -->
+        <script type="text/javascript" src="js/storymap.js"></script>
+        <script type="text/javascript" src="js/data.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript" src="js/timeline.js"></script>
+        <script type="text/javascript" src="js/ice-timeline.js"></script>
+        <script type="text/javascript" src="js/mapSlider.js"></script>
+        <script type="text/javascript" src="js/info-layer.js"></script>
+        <script type="text/javascript" src="js/natives-land.js"></script>
+        <script>
+            // TODO move in main
+            var rad = $(".form-radio");
+            var previous = null;
+            for (var i = 0; i < rad.length; i++) {
+                rad[i].children[0].addEventListener("change", function () {
+                    previous ? controlOff(previous.value) : null;
+                    if (this !== previous) {
+                        previous = this;
+                    }
+                    controlOn(this.value);
+                });
+            }
+            //add information points travel lines on startup
+            toggleBtnClickInfo(clicked_info);
+            toggleBtnClickLines(clicked_lines);
+            //hide the change story button
+            $("#story_change").hide();
+            // enable popovers
+            $(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+            // enable modal
+            setTimeout(function () {
+                $("#myModal").modal();
+            }, 1000);
+        </script>
+    </body>
 </html>
