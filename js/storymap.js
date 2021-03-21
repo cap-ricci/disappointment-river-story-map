@@ -1,7 +1,8 @@
 function writeStory(json, data) {
   var features = json.features
-  //sort json by objectid
-  features.sort((a, b) => parseFloat(a.properties.OBJECTID) - parseFloat(b.properties.OBJECTID));
+  //sort json by date
+  features.sort((a, b) => parseFloat(a.properties.date) - parseFloat(b.properties.date));
+  console.log(features);
   var first_feature = features[0];
 
   var start = '<div class="chapter" name="start"' +
@@ -51,7 +52,7 @@ function writeStory(json, data) {
 
       })
   
-  return html.html()
+  return html.append($('<div style="height:100px"></div>')).html()
 }
 //FIXME not working
 function writeChapters(json) {
