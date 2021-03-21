@@ -180,9 +180,7 @@
 .ol-storymap {
   margin-bottom: 100px;
 }
-#story {
-  margin-bottom: 100px;
-}
+
 #story img {
 display: block;
 margin: auto;
@@ -202,6 +200,10 @@ cursor: pointer;
 /* timeline styling */
 .ol-feature {
   padding: 0!important;
+}
+
+.ol-timeline .ol-scroll {
+  height: 13em!important;
 }
 /* TODO not used? */
 /* Dropdown Button */

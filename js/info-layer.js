@@ -37,25 +37,26 @@ var select = new ol.interaction.Select({
 });
 
 infoLayer.set('selectable', true);
-//TODO load elements only if present
 // extend popups to show information on the travel lines as well
 function makePopupContent(feature) {
   var content = "";
   //information layer
   if (feature.getGeometry().getType() === "Point") {
-    content += "<b>" + feature.get("title") + "</b>";
+    if(feature.get("voyage")) {
+      content += "<b>" + storylines[feature.get("voyage")].title + "</b>";
+    }
+    content += "<h4>" + feature.get("title") + "</h4>";
     content += "<p><p><p>";
     content += "<img src='" + feature.get("img") + "'/>";
-    content += "<i>Image: "
     if (feature.get("img_captio")) {
+      content += "<i>Image: "
       content += feature.get("img_captio") + "</i>";
     }
     content += "<p>";
     content += feature.get("text");
     content += "<p>";
-    content += feature.get("url_text");
     if (feature.get("url") != "") {
-      content += "<a href=" + feature.get("url") + " title='Info'> here.</a>";
+      content += "<a href=" + feature.get("url") + " title='Info' target='_blank'>" + feature.get("url_text") +"</a>";
     }
   }
   // FIXME lines are hidden when selected
