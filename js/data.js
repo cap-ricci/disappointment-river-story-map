@@ -27,7 +27,7 @@ var storylines = {
         'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Alexander_MacKenzie_by_Thomas_Lawrence_%28c.1800%29.jpg">',
         'description': 'Learn how the explorer of the North found his way from Scotland to the remote fur trade posts on Lake Athabasca.',
         "points_name": 'mackenzieLifePoints',
-        "color": "chocolate"
+        "color": "#ffffff"
     },
     "mackenzie" : {
         'title': 'Alexander Mackenzie: the quest for the Northwest Passage',
@@ -45,12 +45,12 @@ var storylines = {
         "points_name": 'castnerPoints',
         "color": "#0b872a"
     },
-    // "mackay" : {
-    //     'title': '',
-    //     'storymap_img': '<img src="">',
-    //     'description': '',
-    //     "lines_name": '',
-    //     "points_name": '',
-    //     "color": ""
-    // }
+    "mackay" : {
+        'title': 'John Ross Mackay: Permafrost explorer in Canadian Arctic',
+        'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Urn_cambridge.org_id_binary_20200207145433927-0428_9781108552172_42804fig11_2.jpg">',
+        'description': 'J.Ross Mackay was a Canadian geographer who explored the permafrost phenomena in teh western Canadian Arctic. Read his short biography in researchgate <a href="https://www.researchgate.net/profile/C-Burn/publication/274313048_J_Ross_Mackay_1915-2014/links/5524447a0cf22e181e738d78/J-Ross-Mackay-1915-2014.pdf" target="_blank">here</a>',
+        "lines_name": 'Mackay_lines',
+        "points_name": 'Mackay_new1',
+        "color": "#fff"
+    }
 }
