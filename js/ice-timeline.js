@@ -66,6 +66,16 @@ iceTline.addButton({
   },
 });
 
+iceTline.addButton({
+  html: '<i class="fa fa-pause"></i>',
+  className: "pause",
+  title: "Pause the timeline",
+  handleClick: function () {
+      go();
+  },
+});
+
+
 var newstyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
       color: [50, 151, 154, 1.0],
