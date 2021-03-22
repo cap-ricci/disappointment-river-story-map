@@ -2,99 +2,95 @@
 // load point features for timeline
 function chainRequest(list) {
   var typenames = [];
-  for(const key in list){
-    elem = list[key];
-    typenames.push(elem.points_name);
+  for (const key in list) {
+      elem = list[key];
+      typenames.push(elem.points_name);
   }
-  return typenames.join(',')
+  return typenames.join(",");
 }
 
-
 var timelinePointsSource = new ol.source.Vector({
-  url: 'http://localhost:8080/geoserver/explore/wfs?service=WFS&' +
-    'version=1.1.0' +
-      '&request=GetFeature' +
-      '&typename=explore:' + chainRequest(storylines) +
-    '&outputFormat=application/json',
-  format: new ol.format.GeoJSON()
+  url: "http://localhost:8080/geoserver/explore/wfs?service=WFS&" + "version=1.1.0" + "&request=GetFeature" + "&typename=explore:" + chainRequest(storylines) + "&outputFormat=application/json",
+  format: new ol.format.GeoJSON(),
 });
 // TODO maybe style points with an icon
 var timelinePoints = new ol.layer.Vector({
-  name: 'points',
+  name: "points",
   source: timelinePointsSource,
   // style: style()
 });
 ////// TIMELINE INFORMATION
-var listenerKey = timelinePointsSource.on('change', function(e) {
-if (timelinePointsSource.getState() == 'ready') {
-  ol.Observable.unByKey(listenerKey);
-  tline.refresh();
+var listenerKey = timelinePointsSource.on("change", function (e) {
+  if (timelinePointsSource.getState() == "ready") {
+      ol.Observable.unByKey(listenerKey);
+      tline.refresh();
   }
-  });
-
-// change point colour depending on voyage 
-timelinePoints.setStyle(function(feature) {
-  let fillColor = storylines[feature.get('voyage')].color;
-
-  return new ol.style.Style({
-   image: new ol.style.Circle({
-     radius: 5,
-     fill: new ol.style.Fill({color: fillColor}),
-     stroke: new ol.style.Stroke({
-       color: [255,255,255], width: 1
-     })
-   })
-})
 });
 
+// change point colour depending on voyage
+timelinePoints.setStyle(function (feature) {
+  let fillColor = storylines[feature.get("voyage")].color;
+
+  return new ol.style.Style({
+      image: new ol.style.Circle({
+          radius: 5,
+          fill: new ol.style.Fill({ color: fillColor }),
+          stroke: new ol.style.Stroke({
+              color: [255, 255, 255],
+              width: 1,
+          }),
+      }),
+  });
+});
 
 //Timeline control
 var info = $(".options").html("");
 
 var tline = new ol.control.Timeline({
-  className: 'ol-zoomhover',
+  className: "ol-zoomhover",
   source: timelinePointsSource,
-  graduation: 'month',
+  graduation: "month",
   zoomButton: true,
-  getHTML: function(f){
-    //return '<img src="'+f.get('img')+'"/> '+(f.get('geo_name')||'');
-    return  '<div style="color: white; background-color:'+
-        storylines[f.get('voyage')].color+
-        '">'+f.get('geo_name')+'</div>';
+  getHTML: function (f) {
+      //return '<img src="'+f.get('img')+'"/> '+(f.get('geo_name')||'');
+      return '<div style="color: white; background-color:' + storylines[f.get("voyage")].color + '">' + f.get("geo_name") + "</div>";
   },
-  getFeatureDate: function(f) {
-    return f.get('date');
+  getFeatureDate: function (f) {
+      return f.get("date");
   },
-  endFeatureDate: function(f) {
-    var d = f.get('endDate');
-    // Create end date
-    if (!d) {
-      d = new Date (f.get('date')); 
-      d = new Date( d.getTime() + (5 + 100*10*24*60*60*1000));
-      f.set('endDate', d);
-    }
-    return d;
-  }
+  endFeatureDate: function (f) {
+      var d = f.get("endDate");
+      // Create end date
+      if (!d) {
+          d = new Date(f.get("date"));
+          d = new Date(d.getTime() + (5 + 100 * 10 * 24 * 60 * 60 * 1000));
+          f.set("endDate", d);
+      }
+      return d;
+  },
 });
 
 // make popup overlay
-var timelinepopup = new ol.Overlay.Popup (
-  {	popupClass: "default", //"tooltips", "warning" "black" "default", "tips", "shadow",
-    closeBox: true,
-    onshow: function(){ console.log("You opened the timeline box"); },
-    onclose: function(){ console.log("You close the timeline box"); },
-    positioning: 'top-center',
-    autoPan: true,
-    autoPanAnimation: { duration: 250 }
+var timelinepopup = new ol.Overlay.Popup({
+  popupClass: "default", //"tooltips", "warning" "black" "default", "tips", "shadow",
+  closeBox: true,
+  onshow: function () {
+      console.log("You opened the timeline box");
+  },
+  onclose: function () {
+      console.log("You close the timeline box");
+  },
+  positioning: "top-center",
+  autoPan: true,
+  autoPanAnimation: { duration: 250 },
 });
 
 // Select a feature
-tline.on('select', function(e){
-
+tline.on("select", function (e) {
   // Center map on feature
   map.getView().animate({
-    center: e.feature.getGeometry().getCoordinates(),
-    zoom: 8
+      center: e.feature.getGeometry().getCoordinates(),
+      zoom: 8,
   });
   // Center time line on feature
   tline.setDate(e.feature);
@@ -104,74 +100,74 @@ tline.on('select', function(e){
 
   var p = e.feature;
   if (p) {
-    // Show info
-    var content = makePopupContent(p);
-    timelinepopup.show(p.getGeometry().getFirstCoordinate(), content);
-      } else {
-    $("#select").html("<p>Select an image.</p>");
+      // Show info
+      var content = makePopupContent(p);
+      timelinepopup.show(p.getGeometry().getFirstCoordinate(), content);
+  } else {
+      $("#select").html("<p>Select an image.</p>");
   }
 });
 
 // Collapse the line
-tline.on('collapse', function(e) {
-  if (e.collapsed) $('#map').addClass('noimg')
-  else $('#map').removeClass('noimg')
+tline.on("collapse", function (e) {
+  if (e.collapsed) $("#map").addClass("noimg");
+  else $("#map").removeClass("noimg");
 });
 // scroll the line
-tline.on('scroll', function(e){
-  $('.options .date').text(e.date.toLocaleDateString());
+tline.on("scroll", function (e) {
+  $(".options .date").text(e.date.toLocaleDateString());
 });
 // choose feature by clicking on it on the map
 
 var timelineselect = new ol.interaction.Select({
-    layers: function(layer) {
-	  return layer.get('selectable') == true;
-	  },
-    hitTolerance: 5,
-    style: new ol.style.Style({
-          image: new ol.style.Circle({
-            radius: 5,
-            fill: new ol.style.Fill({color: 'gold'}),
-            stroke: new ol.style.Stroke({
-              color: [255,255,255], width: 1
-            })
-          })
-        })
-});//, style: style(true)
+  layers: function (layer) {
+      return layer.get("selectable") == true;
+  },
+  hitTolerance: 5,
+  style: new ol.style.Style({
+      image: new ol.style.Circle({
+          radius: 5,
+          fill: new ol.style.Fill({ color: "gold" }),
+          stroke: new ol.style.Stroke({
+              color: [255, 255, 255],
+              width: 1,
+          }),
+      }),
+  }),
+}); //, style: style(true)
 
-timelinePoints.set('selectable', true);
+timelinePoints.set("selectable", true);
 
-timelineselect.on('select', function(e){
+timelineselect.on("select", function (e) {
   var f = e.selected[0];
   if (f) {
-    tline.setDate(f);
-    // Show info
-    // TODO add delay
-    var content = makePopupContent(f);
-    timelinepopup.show(f.getGeometry().getFirstCoordinate(), content);
+      tline.setDate(f);
+      // Show info
+      // TODO add delay
+      var content = makePopupContent(f);
+      timelinepopup.show(f.getGeometry().getFirstCoordinate(), content);
   } else {
-    $("#select").html("<p>Select an image.</p>");
+      $("#select").html("<p>Select an image.</p>");
   }
 });
 
 // add fast scroll buttons (+- 50 yrs)
 tline.addButton({
   html: '<i class="fa fa-fast-forward"></i>',
-  handleClick: function(){
-    var date = tline.getDate('center');
-    date.setDate(date.getDate() + 365*50);
-    tline.setDate(date);
-  }
-})
+  handleClick: function () {
+      var date = tline.getDate("center");
+      date.setDate(date.getDate() + 365 * 50);
+      tline.setDate(date);
+  },
+});
 tline.addButton({
   html: '<i class="fa fa-fast-backward"></i>',
-  handleClick: function(){
-    var date = tline.getDate('center');
-    date.setDate(date.getDate() - 365*50);
-    tline.setDate(date);
-  }
-})
-
+  handleClick: function () {
+      var date = tline.getDate("center");
+      date.setDate(date.getDate() - 365 * 50);
+      tline.setDate(date);
+  },
+});
 
 // TIMELINE function
 // TODO change name
@@ -186,7 +182,7 @@ function start_timelines() {
   // tline.setDate("1779-01-01");
 }
 
-function stop_timelines(){
+function stop_timelines() {
   map.removeInteraction(timelineselect);
   map.removeControl(tline);
   // TODO change timelinePoints into a parameter?
