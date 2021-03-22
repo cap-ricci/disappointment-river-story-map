@@ -6,7 +6,7 @@
 
 .sidebar-section-content {
   padding: 10px 10px 10px 20px;
-  background-color: #818181;
+  background-color: #ddebf6;
 }
 
 .sidenav {
@@ -27,13 +27,14 @@
   text-decoration: none;
   font-size: 18px;
   line-height: 20px;
-  color: #818181;
+  color: white;
   display: block;
   transition: 0.3s;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  /* color: #f1f1f1; */
+  font-weight: bold;
 }
 
 .sidenav .closebtn {
