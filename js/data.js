@@ -19,6 +19,7 @@ var storylines = {
         'title': 'Peter Pond, Athabasca\'s early explorer',
         'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Fur_traders_in_canada_1777.jpg">',
         'description': 'Discover life and exploration of Peter Pond, a controversial figure of the 18th century, who inspired Mackenzie to search the North West Passage.',
+        'lines_name': 'pondLine',
         'points_name': 'pondLifePoints',
         "color": "#ff84da"
     },
@@ -26,8 +27,9 @@ var storylines = {
         'title': 'Alexander Mackenzie: from the Highlands to the North West Territories',
         'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Alexander_MacKenzie_by_Thomas_Lawrence_%28c.1800%29.jpg">',
         'description': 'Learn how the explorer of the North found his way from Scotland to the remote fur trade posts on Lake Athabasca.',
+        'lines_name': 'mackenzieLifeLine',
         "points_name": 'mackenzieLifePoints',
-        "color": "#ffffff"
+        "color": "chocolate"
     },
     "mackenzie" : {
         'title': 'Alexander Mackenzie: the quest for the Northwest Passage',
