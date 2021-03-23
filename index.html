@@ -88,6 +88,9 @@ You can also:
                             <a class="nav-link" href="about.html">About</a>
                         </li>
                     </ul>
+                    <button name = "print">
+                        Print
+                    </button>
                 </div>
             </div>
         </nav>
@@ -325,6 +328,9 @@ You can also:
             setTimeout(function () {
                 $("#myModal").modal();
             }, 1000);
+
+            const printbutton = document.querySelector("[name = 'print']")
+            printbutton.addEventListener('click', function() {window.print()}, false);
         </script>
     </body>
 </html>
