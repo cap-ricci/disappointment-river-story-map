@@ -20,7 +20,7 @@ var storylines = {
         'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Fur_traders_in_canada_1777.jpg">',
         'description': 'Discover life and exploration of Peter Pond, a controversial figure of the 18th century, who inspired Mackenzie to search the North West Passage.',
         'lines_name': 'pondLine',
-        'points_name': 'pondLifePoints',
+        'points_name': 'pondPoints',
         "color": "#ff84da"
     },
     "mackenzieLife" : {
