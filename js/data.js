@@ -52,7 +52,7 @@ var storylines = {
         'storymap_img': '<img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Urn_cambridge.org_id_binary_20200207145433927-0428_9781108552172_42804fig11_2.jpg">',
         'description': 'J.Ross Mackay was a Canadian geographer who explored the permafrost phenomena in teh western Canadian Arctic. Read his short biography in researchgate <a href="https://www.researchgate.net/profile/C-Burn/publication/274313048_J_Ross_Mackay_1915-2014/links/5524447a0cf22e181e738d78/J-Ross-Mackay-1915-2014.pdf" target="_blank">here</a>',
         "lines_name": 'Mackay_lines',
-        "points_name": 'Mackay_new1',
-        "color": "#fff"
+        "points_name": 'Mackay_Points',
+        "color": "orange"
     }
 }
