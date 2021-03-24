@@ -180,6 +180,7 @@ tlineModern.addButton({
 // TODO change name
 // display layers and control when it is selected
 function start_timeline_modern() {
+  toggleLines(false, ['castner', 'mackay']);
   map.addInteraction(timelineselectModern);
   map.addLayer(timelinePointsModern);
   timelinePointsModern.setZIndex(99);
@@ -195,4 +196,5 @@ function stop_timeline_modern() {
   // TODO change timelinePoints into a parameter?
   map.removeLayer(timelinePointsModern);
   map.removeOverlay(timelinepopupModern);
+  toggleLines(true, ['castner', 'mackay']);
 }

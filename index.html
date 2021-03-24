@@ -56,7 +56,7 @@
             <a href="#" style="border-left: 3px solid chocolate;" title="story" onclick="story_init('mackenzieLife');">Alexander Mackenzie: from the Highlands to the NWT</a>
             <a style="border-left: 3px solid #ff3328;" href="#" title="story" onclick="story_init('mackenzie');">Alexander Mackenzie: in search of the Northwest Passage</a>
             <a style="border-left: 3px solid #0b872a;" href="#" title="story" onclick="story_init('castner');">Brian Castner: Disappointment River</a>
-            <a href="#" title="story" style="border-left: 3px solid rgb(197, 14, 136);" onclick="story_init('mackay');">Mackay: Permafrost explorer in Canadian Arctic</a>
+            <a href="#" title="story" style="border-left: 3px solid orange;" onclick="story_init('mackay');">Mackay: Permafrost explorer in Canadian Arctic</a>
         </div>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg static-top navbar-custom">
@@ -88,9 +88,9 @@ You can also:
                             <a class="nav-link" href="about.html">About</a>
                         </li>
                     </ul>
-                    <button name = "print">
+                    <!-- <button name = "print">
                         Print
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </nav>
@@ -142,7 +142,7 @@ You can also:
                         </a>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox" name="layer" id="lines_layer" checked />
+                        <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox" name="layer" id="lines_layer" />
                         <label class="form-check-label" for="lines">
                             Storylines
                         </label>
@@ -327,7 +327,7 @@ You can also:
             }
             //add information points travel lines on startup
             toggleBtnClickInfo(clicked_info);
-            toggleBtnClickLines(clicked_lines);
+            // toggleBtnClickLines(clicked_lines);
             //hide the change story button
             $("#story_change").hide();
             // enable popovers
@@ -339,8 +339,8 @@ You can also:
                 $("#myModal").modal();
             }, 1000);
 
-            const printbutton = document.querySelector("[name = 'print']")
-            printbutton.addEventListener('click', function() {window.print()}, false);
+            // const printbutton = document.querySelector("[name = 'print']")
+            // printbutton.addEventListener('click', function() {window.print()}, false);
         </script>
     </body>
 </html>

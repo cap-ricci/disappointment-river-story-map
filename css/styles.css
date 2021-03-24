@@ -45,6 +45,12 @@
     font-weight: bold;
 }
 
+#story_change {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .footer-custom {
   background-color: black;
   color: white;

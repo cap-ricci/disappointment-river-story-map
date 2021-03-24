@@ -468,6 +468,43 @@ function toggleBtnClickNative(clicked) {
 }
 
 
+function toggleLines(clicked, list) {
+  if (clicked) {
+    // clicked_lines = false;
+    var toDelete = [];
+    list.forEach(function(key) {
+      elem = storylines[key];
+      toDelete.push(elem.title);
+    })
+    var layersToRemove = [];
+    map.getLayers().forEach(function (layer) {
+      if (toDelete.indexOf(layer.get('name')) >= 0) {
+        layersToRemove.push(layer);
+      }
+    })
+    var len = layersToRemove.length;
+    for (var i = 0; i < len; i++) {
+      map.removeLayer(layersToRemove[i]);
+    }
+  } else {
+    var toName = [];
+    var lines = load_lines(list)
+    for (const key in lines) {
+      //if (Object.hasOwnProperty.call(lines, key)) {
+      const element = lines[key];
+      map.addLayer(element);
+      toName.push(elem.title);
+    }
+    // }
+
+    map.getLayers().forEach(function (layer) {
+      if (toName.indexOf(layer.get('name')) >= 0) {
+        layer.setZIndex(map.getLayers().getArray().length);
+      }
+    })
+    // clicked_lines = true;
+  }
+}
 
 function toggleBtnClickLines(clicked) {
   if (clicked) {
@@ -489,7 +526,7 @@ function toggleBtnClickLines(clicked) {
     }
   } else {
     var toName = [];
-    var lines = load_lines(storylines)
+    var lines = load_lines(['cook', 'hearne', 'pond', 'mackenzieLife', 'mackenzie', 'castner', 'mackay'])
     for (const key in lines) {
       //if (Object.hasOwnProperty.call(lines, key)) {
       const element = lines[key];

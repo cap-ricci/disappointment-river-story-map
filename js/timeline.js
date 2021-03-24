@@ -178,6 +178,7 @@ tlineAncient.addButton({
 // TODO change name
 // display layers and control when it is selected
 function start_timeline_ancient() {
+  toggleLines(false, ['cook', 'hearne', 'pond', 'mackenzieLife' , 'mackenzie']);
   map.addInteraction(timelineselectAncient);
   map.addLayer(timelinePointsAncient);
   timelinePointsAncient.setZIndex(99);
@@ -193,4 +194,5 @@ function stop_timeline_ancient() {
   // TODO change timelinePoints into a parameter?
   map.removeLayer(timelinePointsAncient);
   map.removeOverlay(timelinepopupAncient);
+  toggleLines(true, ['cook', 'hearne', 'pond', 'mackenzieLife' , 'mackenzie']);
 }
