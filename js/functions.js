@@ -522,8 +522,11 @@ function controlOn(controlName) {
     case 'ice-timeline':
       show_arctic_map();
       break;
-    case 'events-timeline':
-      start_timelines();
+    case 'events-timeline-ancient':
+      start_timeline_ancient();
+      break;
+    case 'events-timeline-modern':
+      start_timeline_modern();
       break;
     case 'storymap':
       //ask user which storymap -> open hidden side panel
@@ -542,9 +545,11 @@ function controlOff(controlName) {
     case 'ice-timeline':
       noshow_arctic_map();
       break;
-    case 'events-timeline':
-
-      stop_timelines();
+    case 'events-timeline-ancient':
+      stop_timeline_ancient();
+      break;
+    case 'events-timeline-modern':
+      stop_timeline_modern();
       break;
     case 'storymap':
 

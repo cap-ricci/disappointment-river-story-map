@@ -36,7 +36,7 @@ var storylines = {
         'storymap_img': '<img src="https://www.cwjefferys.ca/uploads/thumbnails/mackenzieatthearctic960.jpg.cad2c5e9.jpg#.YEiHcTBfxPc.link">',
         'description': 'Follow Mackenzie on his journey down the Deh Cho, the Great River that today bears his name.',
         "points_name": 'mackenziePoints',
-        "lines_name": "mackenzieLines",
+        "lines_name": "mackenzieLine",
         "color": "#ff3328"
     },
     "castner" : {
