@@ -18,7 +18,7 @@ var infoSource = new ol.source.Vector({
 });
 
 var infoLayer = new ol.layer.Vector({
-  name: "Additional information points",
+  name: "info_layer",
   source: infoSource,
   style: new ol.style.Style({ image: new ol.style.Icon({ src: "img/infopoint.svg", scale: 1.5 }) }),
 });
@@ -75,7 +75,6 @@ function show_info_layer() {
   map.addOverlay(popup);
   window.topLayer = infoLayer;
   map.addLayer(infoLayer);
-  infoLayer.setZIndex(map.getLayers().getArray().length);
   map.addInteraction(select);
 }
 

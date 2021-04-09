@@ -59,11 +59,53 @@
 </head>
 
 <body>
-    <ul id="items">
-        <li>item 1</li>
-        <li>item 2</li>
-        <li>item 3</li>
-    </ul>
+    
+    <div id="layers" class="sidebar-section-content">
+        <div class="form-check" data-layer='info_layer'>
+            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickInfo(clicked_info);" type="checkbox" name="layer" id="info_layer" checked />
+            <label class="form-check-label" for="info_layer">
+                Information points
+            </label>
+            <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(infoLayer);"></i>
+            <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(infoLayer);"></i>
+            <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="General information points about arctic exploration and climate change.">
+                <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+            </a>
+        </div>
+        <div class="form-check" data-layer='lines_layer'>
+            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickLines(clicked_lines);" type="checkbox" name="layer" id="lines_layer" />
+            <label class="form-check-label" for="lines">
+                Storylines
+            </label>
+            <i class="fa fa-chevron-up" aria-hidden="true" onclick="linesUp(storylines);"></i>
+            <i class="fa fa-chevron-down" aria-hidden="true" onclick="linesDown(storylines);"></i>
+            <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="Lines illustrating the explorers' travels and lives.">
+                <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+            </a>
+        </div>
+        <div class="form-check" data-layer='natives_land'>
+            <input class="form-check-input" title="Open Street Map" onclick="toggleBtnClickNative(clicked_natives);" type="checkbox" name="layer" id="nativesLand" />
+            <label class="form-check-label" for="lines">
+                Native lands
+            </label>
+            <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp(nativesLand);"></i>
+            <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown(nativesLand);"></i>
+            <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="Current territories of native lands in North America.">
+                <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+            </a>
+        </div>
+        <div class="form-check" data-layer='relief'>
+            <input class="form-check-input" title="Open Street Map" ; onclick="toggleBtnClick(clicked_relief, 'relief');" type="checkbox" name="layer" id="relief" />
+            <label class="form-check-label" for="relief">
+                Canadian relief
+            </label>
+            <i class="fa fa-chevron-up" aria-hidden="true" onclick="oneUp('relief');"></i>
+            <i class="fa fa-chevron-down" aria-hidden="true" onclick="oneDown('relief');"></i>
+            <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" data-content="A more detailed view on Canadian topography.">
+                <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
+            </a>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -77,11 +119,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         // Default SortableJS
-        var el = document.getElementById('items');
+        var el = document.getElementById('layers');
         var sortable = Sortable.create(el,
         {
-            onEnd: function(evt) {
-                console.log("new index " + evt.newIndex)
+            // handle: ".my-handle",
+            onEnd: function() {
+                var controllers = [];
+                $('#layers').children().each(function(){
+                controllers.push($(this).attr('data-layer'));
+                
+  });
+  console.log(controllers);
             }
         });
     </script>

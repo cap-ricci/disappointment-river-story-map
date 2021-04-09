@@ -6,7 +6,6 @@ function colorWithAlpha(color, alpha) {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
         [r, g, b] = [0, 0, 0]
     }
-    //return ol.color.asString([r, g, b, alpha]);
     return 'rgba(' + r +", " + g + ", " + b + ", " + alpha +')'
 }
     var nativesSource = new ol.source.Vector({
@@ -19,7 +18,7 @@ function colorWithAlpha(color, alpha) {
     });
 
     var nativesLand = new ol.layer.Vector({
-      name: 'Natives Land',
+      name: 'natives_land',
       source: nativesSource
     });
 
