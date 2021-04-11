@@ -271,3 +271,19 @@ width: 200px;
 font-size: 1rem;
 padding: 10px;
 }
+
+/* handles for dragging the sortable list Layers */
+.handle {
+  cursor: move;
+	cursor: -webkit-grabbing;
+  color: #818181;
+}
+
+.draggable-item {
+  border-bottom: 1px solid #81818169;
+  padding: 5px;
+}
+
+.draggable-list {
+  padding: 0px!important;
+}

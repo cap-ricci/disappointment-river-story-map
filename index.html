@@ -145,9 +145,10 @@ You can also:
             <a class="list-group-item list-group-item-action bg-dark">
                 Layers
             </a>
-            <div id="layers" class="sidebar-section-content">
-                <div class="form-check" data-layer='info_layer'>
-                    <input class="form-check-input" onclick="toggleBtnClick(this);" type="checkbox" name="info_layer" />
+            <div id="layers" class="sidebar-section-content draggable-list">
+                <div class="form-check draggable-item" data-layer='info_layer'>
+                    <i class="fa fa-bars handle" aria-hidden="true"></i>
+                    <input onclick="toggleBtnClick(this);" type="checkbox" name="info_layer" />
                     <label class="form-check-label" for="info_layer">
                         Information points
                     </label>
@@ -156,8 +157,9 @@ You can also:
                         <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
                     </a>
                 </div>
-                <div class="form-check" data-layer='lines_layer'>
-                    <input class="form-check-input" onclick="toggleBtnClick(this);" type="checkbox"
+                <div class="form-check draggable-item" data-layer='lines_layer'>
+                    <i class="fa fa-bars handle" aria-hidden="true"></i>
+                    <input onclick="toggleBtnClick(this);" type="checkbox"
                         name="lines_layer" />
                     <label class="form-check-label" for="lines">
                         Storylines
@@ -167,8 +169,9 @@ You can also:
                         <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
                     </a>
                 </div>
-                <div class="form-check" data-layer='natives_land'>
-                    <input class="form-check-input" onclick="toggleBtnClick(this);" type="checkbox"
+                <div class="form-check draggable-item" data-layer='natives_land'>
+                    <i class="fa fa-bars handle" aria-hidden="true"></i>
+                    <input onclick="toggleBtnClick(this);" type="checkbox"
                         name="natives_land" />
                     <label class="form-check-label" for="lines">
                         Native lands
@@ -178,8 +181,9 @@ You can also:
                         <i class="fa fa-question-circle" aria-hidden="true" style="color: black;"></i>
                     </a>
                 </div>
-                <div class="form-check" data-layer='relief'>
-                    <input class="form-check-input" onclick="toggleBtnClick(this);" type="checkbox" name="relief" />
+                <div class="form-check draggable-item" data-layer='relief'>
+                    <i class="fa fa-bars handle" aria-hidden="true"></i>
+                    <input onclick="toggleBtnClick(this);" type="checkbox" name="relief" />
                     <label class="form-check-label" for="relief">
                         Canadian relief
                     </label>
